@@ -1,0 +1,55 @@
+<div class="container cards-container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card custom-card">
+        <div class="card-header text-center">
+          <h5>Rapport de stage</h5>
+        </div>
+        <div class="card-body p-0">
+          <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
+            <img class="card-img-top" src="/assets/images/rapportdestage1.png" alt="Card image cap" (click)="insertCategorie(1, 'Rapport de stage')">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card custom-card">
+        <div class="card-header text-center">
+          <h5>Thèse</h5>
+        </div>
+        <div class="card-body p-0">
+          <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
+          <img class="card-img-top" src="/assets/images/these.png" alt="Card image cap" (click)="insertCategorie(2, 'Thèse')">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card custom-card">
+        <div class="card-header text-center">
+          <h5>Catalogue</h5>
+        </div>
+        <div class="card-body p-0">
+          <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
+          <img class="card-img-top" src="/assets/images/catalogue.jpg" alt="Card image cap" (click)="insertCategorie(3, 'Catalogue')">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card custom-card">
+        <div class="card-header text-center">
+          <h5>Flyers</h5>
+        </div>
+        <div class="card-body p-0">
+          <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
+          <img class="card-img-top" src="/assets/images/flyers.png" alt="Card image cap" (click)="insertCategorie(4, 'Flyers')">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+.my-card {
+  height: 120px;
+  width: 320px;
+  border-radius: 10px;
+  background-color: #F9F9FF;
+}
+.cardv1 {
+  width: 100px;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-right: 1px solid #ddd;
+  text-align: center;
+}
+.cardv2 {
+  width: 80px;
+  height: 75%;
+  background-color: #f5f5f5;
+  border-right: 1px solid #D9E8FF;
+  text-align: center;
+  margin-bottom: 25px;
+  border-right: 1px solid #ddd;
+  background-color: #F9F9FF ;
+  border-radius: 5px
+}
+.cardadresse{
+  border:none;
+  margin-top: 50px;
+}
+
+.cardv3 {
+  width: 100px;
+  height:80px;
+  border-right: 1px solid #ddd;
+  text-align: center;
+  background-color: #F9F9FF ;
+  border-right: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.card1{
+  margin-bottom: 55%;
+}
+.card2{
+  margin-bottom: 74%;
+}

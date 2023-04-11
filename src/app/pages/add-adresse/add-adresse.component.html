@@ -1,0 +1,67 @@
+<div class="container my-5">
+  <div class="cardadresse mb-3">
+    <div class="card-body">
+      <h5>Ajouter une nouvelle adresse</h5>
+      <hr>
+      Pour ajouter une nouvelle adresse, merci de remplir ce formulaire.      <br>
+      Vos adresses sont listées ci-dessous.
+      <br>
+      <br>
+      <p style="color: lightcoral">* Champ requis</p>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  <div class="container" style="width: 150%">
+    <h2 class=" mb-3">Ajouter une nouvelle adresse</h2>
+    <div class="alert alert-success" role="alert" *ngIf="successMsg">
+      <p>{{successMsg}}</p>
+    </div>
+
+    <form class="row g-3">
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h3>Info adresse :</h3>
+          <div class="form-group mb-3">
+            <label for="rue" class="form-label">* Rue</label>
+            <input type="text" class="form-control" id="rue" [(ngModel)]="adresse.rue" name="rue" [ngClass]="{'is-invalid': !adresse.rue}" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="complement" class="form-label">Complement</label>
+            <input type="text" class="form-control" id="complement" [(ngModel)]="adresse.complement" name="complement">
+          </div>
+          <div class="form-group mb-3">
+            <label for="codePostal" class="form-label">* Code postal</label>
+            <input type="text" class="form-control" id="codePostal" [(ngModel)]="adresse.codePostal" name="codePostal" [ngClass]="{'is-invalid': !adresse.codePostal}" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="ville" class="form-label">* Ville</label>
+            <input type="text" class="form-control" id="ville" [(ngModel)]="adresse.ville" name="ville" [ngClass]="{'is-invalid': !adresse.ville}" required>
+          </div>
+          <div class="form-group mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>*Type d'adresse</mat-label>
+              <mat-select [(ngModel)]="adresse.typeAdresse" id="typeAdresse" name="typeAdresse" required>
+                <mat-option *ngFor="let type of typesAdresses" [value]="type">{{type.nom}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-secondary me-2" (click)="cancel()">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+
+            <button (click)="addAdresse()" type="submit" class="btn btn-outline-success">
+              <em class="fas fa-save"></em>&nbsp;Save
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </form>
+
+
+  </div>
+</div>

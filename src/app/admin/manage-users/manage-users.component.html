@@ -1,0 +1,70 @@
+<div class="row vh-100">
+  <div class="col-md-3">
+    <div class="card bg-dark text-white h-100 rounded-0">
+      <app-admin-dashboard></app-admin-dashboard>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+
+        <h2>Liste des utilisateurs</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Infos</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of users" (click)="selectedUser = user">
+            <td>
+                <div class="d-flex align-items-center">
+                  <img
+                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1">{{user.nom}} {{user.prenom}}</p>
+                    <p class="text-muted mb-0">{{user.email}}</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="">
+          <div class="p-3" *ngIf="selectedUser">
+            <h2>Détails</h2>
+            <div class="card custom-card mb-3 shadow" *ngIf="selectedUser">
+              <div class="card-body">
+                <p><strong>Nom:</strong> {{ selectedUser.nom }}</p>
+                <p><strong>Prénom:</strong> {{ selectedUser.prenom }}</p>
+                <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+                <p><strong>Téléphone:</strong> {{ selectedUser.telephone }}</p>
+                <h4>Adresses</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let addr of selectedUser.adresse">
+                    <div class="address">
+                      <span>{{ addr.rue }}, {{ addr.complement }}, {{ addr.ville }}, {{ addr.codePostal }}</span>
+                      <div class="address-type" *ngIf="addr.typeAdresse">
+                        {{ addr.typeAdresse.libelle }}
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+    </div>
+  </div>
+</div>
+<style>
+
+</style>

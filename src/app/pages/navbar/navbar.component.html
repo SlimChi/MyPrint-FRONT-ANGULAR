@@ -1,0 +1,97 @@
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" [routerLink]="!isLogout ? 'home' : 'user/home'">
+          <img
+            src="assets/images/Myprint1.png"
+            height="100"
+            alt="Logo"
+            loading="lazy"
+          />
+        </a>
+
+        <!-- Left links -->
+
+        <!-- Left links -->
+      </div>
+
+      <!-- Custom flag dropdown -->
+      <div class="dropdown">
+<!--        <div>-->
+
+<!--          <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="France" (click)="switchLanguage('fr')">-->
+<!--          <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="United Kingdom" (click)="switchLanguage('en')">-->
+
+<!--          <span class="flag-icon flag-icon-us"></span>-->
+<!--        </div>-->
+      </div>
+
+      <!-- Right elements -->
+      <ul class="navbar-nav d-flex flex-row ms-auto me-3">
+        <p class="dropdown-item mb-0 mt-2 " style="color: whitesmoke" *ngIf="loggedInUserName && isLogout">Bienvenue {{ loggedInUserName }}</p>
+
+        <!-- Shopping cart icon -->
+        <li class="nav-item me-3">
+          <a class="nav-link" style="color: white" [routerLink]="'user/panier'" *ngIf="userRole && isAuthenticated()">
+            <em class="fas fa-shopping-cart"></em>
+          </a>
+        </li>
+
+        <!-- User dropdown -->
+        <!-- Left links -->
+        <div class="ml-auto">
+          <!-- Custom flag dropdown -->
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                class="rounded-circle"
+                height="22"
+                alt="Portrait of a Woman"
+                loading="lazy"
+              />
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-left text-left" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" [routerLink]="'user/moncompte'" *ngIf="userRole && isAuthenticated()">Mon Compte</a>
+                <a class="dropdown-item" [routerLink]="'admin/users'" *ngIf="adminRole && isAuthenticated()">Liste des utilisateurs</a>
+                <a class="dropdown-item" [routerLink]="'user/profile'"*ngIf="userRole && isAuthenticated()">Mes informations</a>
+                <a class="dropdown-item" [routerLink]="'admin/profile'"*ngIf="adminRole && isAuthenticated()">Mes informations</a>
+                <a class="dropdown-item" [routerLink]="'user/panier'"*ngIf="userRole && isAuthenticated()">Mon panier</a>
+                <a class="dropdown-item" [routerLink]="'user/adresses'" *ngIf="userRole && isAuthenticated()">Mes Adresses</a>
+
+                <a (click)="logout()" [routerLink]="'login'" *ngIf="isLogout && isAuthenticated()" class="dropdown-item">Déconnecter</a>
+                <a [routerLink]="'login'" *ngIf="!isAuthenticated()" class="dropdown-item">Se connecter</a>
+
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Left links -->
+
+      </ul>
+    </div>
+    <div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+
+</header>

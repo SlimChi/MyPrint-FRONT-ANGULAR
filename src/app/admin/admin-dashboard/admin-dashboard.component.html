@@ -1,0 +1,16 @@
+<div class="card bg-dark text-white h-100 rounded-0" *ngIf="adminRole && isAuthenticated()">
+  <div class="card-body">
+    <h5 class="card-title">Dashboard</h5>
+    <ul class="list-group">
+      <li class="list-group-item bg-dark ">
+        <button class="btn btn-secondary btn-block" [routerLink]="['/admin/users']" >Liste utilisateurs</button>
+      </li>
+      <li class="list-group-item bg-dark">
+        <button class="btn btn-secondary btn-block" [routerLink]="['/admin/profile']">Mes informations</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+

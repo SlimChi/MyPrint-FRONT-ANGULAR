@@ -1,0 +1,57 @@
+<div class="container" >
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  <div class="p-3">
+    <h2>Mon adresse</h2>
+    <div class="alert alert-success" role="alert" *ngIf="successMsg">
+      <p>{{successMsg}}</p>
+    </div>
+    <div class="d-flex flex-row justify-content-between">
+      <div class="card p-3 col-6 me-1">
+        <h3>Info adresse</h3>
+
+        <div class="form-group">
+          <label for="rue">Rue</label>
+          <input type="text" class="form-control" id="rue" [(ngModel)]="adresse.rue" name="rue" [ngClass]="{'is-invalid': !adresse.rue}" required>
+        </div>
+        <div class="form-group">
+          <label for="complemnt">Complement</label>
+          <input type="text" class="form-control" id="complemnt" [(ngModel)]="adresse.complement" name="complemnt">
+        </div>
+        <div class="form-group">
+          <label for="codePostal">Code postal</label>
+          <input type="text" class="form-control" id="codePostal" [(ngModel)]="adresse.codePostal" name="codePostal" [ngClass]="{'is-invalid': !adresse.codePostal}" required >
+        </div>
+        <div class="mb-3">
+          <label for="ville" class="form-label">Ville</label>
+          <input type="text" class="form-control" id="ville" [(ngModel)]="adresse.ville" name="ville" [ngClass]="{'is-invalid': !adresse.ville}" required >
+        </div>
+        <ng-container *ngIf="adresse && adresse.typeAdresse">
+          <mat-form-field>
+            <mat-label>Type d'adresse</mat-label>
+            <mat-select [(value)]="adresse.typeAdresse.id" name="typeAdresse" required>
+              <mat-option *ngFor="let type of typesAdresses" [value]="type.id">
+                {{ type.nom }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+
+
+        <div class="d-flex justify-content-end mt-3">
+          <button type="button" class="btn btn-outline-secondary me-auto" (click)="cancel()" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+
+          <button (click)="updateAdresse()" type="button" class="btn btn-outline-success" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+            <em class="fas fa-save"></em>&nbsp;Save
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>

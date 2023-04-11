@@ -1,0 +1,41 @@
+.card{
+
+  margin-top: 15%;
+  margin-left: 5%;
+
+}
+.d-inline-flex{
+  margin-bottom: 5%;
+}
+
+.form-check-label{
+  margin-right: 100%;
+}
+.form1{
+  margin-left: 100px;
+}
+.file-name {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+.custom-width {
+  width: 230px; /* ajuster la largeur selon vos besoins */
+}
+.input-group-prepend, .input-group-append {
+  height: 38px;
+}
+
+.btn-outline-secondary {
+  height: 38px;
+  line-height: 1.5;
+}
+
+
+.btn-commande {
+  position: absolute;
+  margin-top: 20px;
+  right: 0;
+}

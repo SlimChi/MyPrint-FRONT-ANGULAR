@@ -1,0 +1,30 @@
+
+.custom-card {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.custom-card p {
+  margin-bottom: 5px;
+}
+
+.custom-card strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.custom-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.address-type {
+  font-size: 14px;
+  color: #999;
+}
