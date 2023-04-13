@@ -21,6 +21,7 @@ export class CommandeComponent implements OnInit {
   progress: number = 0;
   fileName: string = '';
   errorMessage: string = '';
+  fileData: string | null = null;
 
   format: string = "a4";
   couleur: boolean = false;
@@ -92,20 +93,65 @@ export class CommandeComponent implements OnInit {
   }
 
 
-  storeFile() {
-    if (!this.selectedFile) {
-      return;
-    }
+  storeFile(): void {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target) {
+        this.fileData = event.target.result as string; // update the value of fileData
+        const fileName = this.selectedFile?.name ?? '';
+        const fileSize = this.selectedFile?.size ?? 0;
+        const fileDate = new Date();
 
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      const fileData = fileReader.result;
-      if (this.selectedFile != null) {
-        localStorage.setItem('uploadedFile', JSON.stringify({ name: this.selectedFile.name, data: fileData }));
+        const file = {
+          name: fileName,
+          size: fileSize,
+          date: fileDate,
+          data: this.fileData // use the updated value of fileData
+        };
+
+        localStorage.setItem('file', JSON.stringify(file));
       }
-      console.log('Fichier stocké avec succès');
     };
-    fileReader.readAsDataURL(this.selectedFile);
+    reader.readAsDataURL(this.selectedFile as Blob);
+  }
+
+
+
+  ajouterAuPanier(): void {
+    try {
+      // Récupération des données du local storage
+      const panierData: string | null = localStorage.getItem('panier');
+
+      let panier = [];
+
+      // Si des données existent, on les parse en tant qu'objet JSON
+      if (panierData !== null) {
+        panier = JSON.parse(panierData);
+      }
+      // Récupération des données du fichier dans le local storage
+      const fileData: string | null = localStorage.getItem('file');
+
+      // Ajout de la nouvelle commande à l'ancien panier
+      const newOrder = {
+        format: this.format,
+        couleur: this.couleur,
+        rectoVerso: this.rectoVerso,
+        tirage: this.tirage,
+        fileName: this.selectedFile?.name ?? '',
+        fileData: fileData !== null ? JSON.parse(fileData).data : null
+
+
+      };
+      panier.push(newOrder);
+
+      // Stockage des données mises à jour dans le local storage
+      localStorage.setItem('panier', JSON.stringify(panier));
+
+      // Redirection vers la page du panier
+      this.router.navigate(['user/panier']);
+    } catch (error) {
+
+    }
   }
 
 
@@ -150,27 +196,21 @@ export class CommandeComponent implements OnInit {
   }
 
   toggleRectoVerso() {
-    if (!this.couleur) {
+
       this.rectoVerso = !this.rectoVerso;
       console.log('RectoVerso:', this.rectoVerso);
       this.saveData();
-    }
+
   }
 
 
   incrementTirage() {
     this.tirage++;
-    console.log('Tirage:', this.tirage);
-    this.saveData(); // ajout de l'appel à la fonction saveData()
-
   }
 
   decrementTirage() {
     if (this.tirage > 1) {
       this.tirage--;
-      console.log('Tirage:', this.tirage);
-      this.saveData(); // ajout de l'appel à la fonction saveData()
-
     }
   }
 
@@ -223,10 +263,10 @@ export class CommandeComponent implements OnInit {
 
   onCommanderClicked(): void {
     if (this.isAuthenticated()) {
-      this.uploadFile();
+      this.ajouterAuPanier();
       this.router.navigate(['/user/panier']);
     } else {
-      this.uploadFile();
+      this.ajouterAuPanier();
       this.router.navigate(['/user']);
     }
   }

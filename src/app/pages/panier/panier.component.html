@@ -31,7 +31,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let commande of commandes ; let i = index;">
+              <tr *ngFor="let commande of commandes; let i = index;">
                 <th scope="row">{{ i + 1 }}</th>
                 <td>
                   <span class="label-text"><strong>Type :</strong></span>
@@ -39,14 +39,11 @@
                   <span class="label-text"><strong>Format :</strong></span> {{ commande.format }} <br>
                   <span class="label-text"><strong>Impression en :</strong></span> {{ commande.couleur ? 'Couleur' : 'Noir et blanc' }}, <br>
                   <span class="label-text"><strong>Impression en / :</strong></span> {{ commande.rectoVerso ? 'Recto verso' : 'Recto' }}
-                  <div >
-                    <span class="label-text"><strong>Nom du fichier :</strong></span> {{ fileName }}<br>
-<!--                    <span class="label-text"></span> <img [src]="fileUrl" alt="{{fileName}}"/>-->
+                  <div>
+                    <span class="label-text"><strong>Nom du fichier :</strong></span> {{ commande.fileName }}<br>
+                    <!-- <span class="label-text"></span> <img [src]="fileUrl" alt="{{fileName}}"/> -->
                     <br>
-
                   </div>
-
-
                 </td>
                 <td>
                   <div class="d-flex justify-content-center align-items-center">
@@ -55,8 +52,7 @@
                     <button class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementQuantity(commande)"><i class="fa fa-plus"></i></button>
                   </div>
                 </td>
-                <td>
-                </td>
+                <td>5 €</td>
                 <td>{{ commande.prixTotal }} €</td>
                 <td><button class="btn btn-sm btn-danger" (click)="removeItem(commande)"><i class="fa fa-trash"></i></button></td>
               </tr>

@@ -15,7 +15,6 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
     styleUrls: ['./panier.component.css']
 })
 export class PanierComponent {
-    cartItems: any[] = []; // array to hold the items in the cart
     total: number = 0; // variable to hold the total price of items in the cart
     users: UtilisateurDto[] = [];
     user: Array<UtilisateurDto> = [];
@@ -24,7 +23,6 @@ export class PanierComponent {
     errorMessage: string | undefined;
     commandes: any[] = [];
     categories: any[] = [];
-    uploadedFile: string | null = null;
     fileName: string = '';
     file: string ='';
     fileUrl: string = ''; // L'URL sécurisée pour afficher l'icône
@@ -38,12 +36,12 @@ export class PanierComponent {
     }
 
     ngOnInit(): void {
-        this.commandeData();
-        this.categoriesData()
+
         this.findById()
         this.getAllTypeAdresse()
         this.getUserAdresse()
         this.getUploadFile()
+        this.loadCart()
     }
 
     getUserAdresse() {
@@ -55,28 +53,15 @@ export class PanierComponent {
         this.getAllTypeAdresse();
     }
 
-    commandeData() {
-        const commandeDataString = localStorage.getItem('commandeData');
-        if (commandeDataString) {
-            const commandeData = JSON.parse(commandeDataString);
-            this.commandes.push({
-                format: commandeData.format,
-                couleur: commandeData.couleur,
-                rectoVerso: commandeData.rectoVerso,
-                tirage: commandeData.tirage
 
-            });
-        }
-    }
-
-    categoriesData() {
-        const categoriesDataString = localStorage.getItem('categoriesData');
-        if (categoriesDataString) {
-            const categoriesData = JSON.parse(categoriesDataString);
-            this.categories.push({
-                libelle: categoriesData.libelle,
-
-            });
+    loadCart() {
+        try {
+            const panierData: string | null = localStorage.getItem('panier');
+            if (panierData !== null) {
+                this.commandes = JSON.parse(panierData);
+            }
+        } catch (error) {
+            // Gérer l'erreur ici
         }
     }
 
@@ -92,7 +77,7 @@ export class PanierComponent {
     }
 
     getUploadFile() {
-        const uploadedFileString = localStorage.getItem('uploadedFile');
+        const uploadedFileString = localStorage.getItem('file');
         if (uploadedFileString) {
             const uploadedFile = JSON.parse(uploadedFileString);
             this.fileName = uploadedFile.name;
@@ -108,7 +93,13 @@ export class PanierComponent {
             item.tirage--;
             item.prixTotal -= item.prixUnitaire;
             this.total -= item.prixUnitaire;
-            localStorage.setItem('commandeData', JSON.stringify(item));
+            // Mettre à jour l'objet dans le tableau commandes
+            const index = this.commandes.indexOf(item);
+            if (index !== -1) {
+                this.commandes[index] = item;
+                // Mettre à jour le panier dans le localStorage
+                localStorage.setItem('panier', JSON.stringify(this.commandes));
+            }
         }
     }
 
@@ -116,17 +107,25 @@ export class PanierComponent {
         item.tirage++;
         item.prixTotal += item.prixUnitaire;
         this.total += item.prixUnitaire;
-        localStorage.setItem('commandeData', JSON.stringify(item));
+        // Mettre à jour l'objet dans le tableau commandes
+        const index = this.commandes.indexOf(item);
+        if (index !== -1) {
+            this.commandes[index] = item;
+            // Mettre à jour le panier dans le localStorage
+            localStorage.setItem('panier', JSON.stringify(this.commandes));
+        }
     }
+
 
     // function to remove an item from the cart
     removeItem(item: any) {
-        const index = this.cartItems.indexOf(item);
-        if (index > -1) {
-            this.total -= item.price * item.quantity;
-            this.cartItems.splice(index, 1);
+        const index = this.commandes.indexOf(item);
+        if (index !== -1) {
+            this.commandes.splice(index, 1);
+            localStorage.setItem('panier', JSON.stringify(this.commandes));
         }
     }
+
 
     private findById() {
         this.adresseService.findAll1(this.helperService.userId).subscribe({
