@@ -80,16 +80,35 @@ export class CommandeComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.selectedFile, this.selectedFile.name);
     this.http.post('http://localhost:9090/fichiers', formData).subscribe(
-      (response) => {
-        console.log(response);
-        this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', {duration: 4000});
-      },
-      (error) => {
-        console.log(error);
-        this.snackBar.open(`Erreur lors du téléchargement du fichier: ${error.error}`, 'Fermer', {duration: 4000});
-      }
+        (response) => {
+          console.log(response);
+          this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', {duration: 4000});
+        },
+        (error) => {
+          console.log(error);
+          this.snackBar.open(`Erreur lors du téléchargement du fichier: ${error.error}`, 'Fermer', {duration: 4000});
+        }
     );
   }
+
+
+  storeFile() {
+    if (!this.selectedFile) {
+      return;
+    }
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const fileData = fileReader.result;
+      if (this.selectedFile != null) {
+        localStorage.setItem('uploadedFile', JSON.stringify({ name: this.selectedFile.name, data: fileData }));
+      }
+      console.log('Fichier stocké avec succès');
+    };
+    fileReader.readAsDataURL(this.selectedFile);
+  }
+
+
 
   async back() {
     window.history.back();
@@ -112,34 +131,32 @@ export class CommandeComponent implements OnInit {
     this.uploadForm.get('file')!.setValue(file);
   }
 
-
-
-
-
-
   selectFormat(event: any) {
 
-      if (event && event.target && event.target.value) {
-        this.format = event.target.value;
-        console.log('Format sélectionné :', this.format);
-        this.saveData(); // ajout de l'appel à la fonction saveData()
+    if (event && event.target && event.target.value) {
+      this.format = event.target.value;
+      console.log('Format sélectionné :', this.format);
+      this.saveData(); // ajout de l'appel à la fonction saveData()
 
-      }
+    }
   }
 
   toggleCouleur() {
-    this.couleur = !this.couleur;
-    console.log('Couleur:', this.couleur);
-    this.saveData(); // ajout de l'appel à la fonction saveData()
+
+      this.couleur = !this.couleur;
+      console.log('Couleur:', this.couleur);
+      this.saveData();
 
   }
 
   toggleRectoVerso() {
-    this.rectoVerso = !this.rectoVerso;
-    console.log('RectoVerso:', this.rectoVerso);
-    this.saveData(); // ajout de l'appel à la fonction saveData()
-
+    if (!this.couleur) {
+      this.rectoVerso = !this.rectoVerso;
+      console.log('RectoVerso:', this.rectoVerso);
+      this.saveData();
+    }
   }
+
 
   incrementTirage() {
     this.tirage++;
@@ -206,8 +223,10 @@ export class CommandeComponent implements OnInit {
 
   onCommanderClicked(): void {
     if (this.isAuthenticated()) {
-      this.router.navigate(['/user/paiment']);
+      this.uploadFile();
+      this.router.navigate(['/user/panier']);
     } else {
+      this.uploadFile();
       this.router.navigate(['/user']);
     }
   }

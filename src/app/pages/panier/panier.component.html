@@ -1,20 +1,19 @@
 <button class="btn btn-sm btn-outline-secondary position-absolute top-2 start-0 mt-3 ms-3" (click)="back()" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
   Page précédente
 </button>
+
 <div class="div1" style="min-height: calc(100vh - 200px); padding-bottom: 100px;">
   <div class="div1 d-flex align-items-center" style="margin-left: 15%">
     <div class="card mb-3 cardadresse" style="border: none; margin-top: 50px">
       <div class="card-body">
         <h5>MON PANIER</h5>
         <hr>
-        RÉCAPITULATIF DE LA COMMANDE
-        <br>
-
+        <p>RÉCAPITULATIF DE LA COMMANDE</p>
       </div>
     </div>
   </div>
 
-  <div class="container my-5" >
+  <div class="container my-5">
     <div class="row">
       <div class="col-md-8">
         <div class="card mb-3" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
@@ -24,44 +23,78 @@
               <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Produit</th>
-                <th scope="col">Prix unitaire</th>
+                <th scope="col">Info commande</th>
                 <th scope="col">Quantité</th>
+                <th scope="col">Prix unitaire</th>
                 <th scope="col">Prix total</th>
                 <th scope="col"></th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of cartItems; let i = index">
-                <th scope="row">{{ i+1 }}</th>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price }} €</td>
+              <tr *ngFor="let commande of commandes ; let i = index;">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                  <span class="label-text"><strong>Type :</strong></span>
+                  {{ getCategoryLibelle(commande.categorie) }} <br>
+                  <span class="label-text"><strong>Format :</strong></span> {{ commande.format }} <br>
+                  <span class="label-text"><strong>Impression en :</strong></span> {{ commande.couleur ? 'Couleur' : 'Noir et blanc' }}, <br>
+                  <span class="label-text"><strong>Impression en / :</strong></span> {{ commande.rectoVerso ? 'Recto verso' : 'Recto' }}
+                  <div >
+                    <span class="label-text"><strong>Nom du fichier :</strong></span> {{ fileName }}<br>
+<!--                    <span class="label-text"></span> <img [src]="fileUrl" alt="{{fileName}}"/>-->
+                    <br>
+
+                  </div>
+
+
+                </td>
                 <td>
                   <div class="d-flex justify-content-center align-items-center">
-                    <button class="btn btn-sm btn-outline-secondary me-2" (click)="decrementQuantity(item)"><i class="fa fa-minus"></i></button>
-                    <span>{{ item.quantity }}</span>
-                    <button class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementQuantity(item)"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-sm btn-outline-secondary me-2" (click)="decrementQuantity(commande)"><i class="fa fa-minus"></i></button>
+                    {{ commande.tirage }}
+                    <button class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementQuantity(commande)"><i class="fa fa-plus"></i></button>
                   </div>
                 </td>
-                <td>{{ item.quantity * item.price }} €</td>
-                <td><button class="btn btn-sm btn-danger" (click)="removeItem(item)"><i class="fa fa-trash"></i></button></td>
+                <td>
+                </td>
+                <td>{{ commande.prixTotal }} €</td>
+                <td><button class="btn btn-sm btn-danger" (click)="removeItem(commande)"><i class="fa fa-trash"></i></button></td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
+
       <div class="col-md-4">
         <div class="card mb-3" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
           <div class="card-body">
             <h5 class="card-title">Résumé de la commande</h5>
-            <p>Total : {{ total ? total : 0 }} €</p>
-            <div class="text-end"> <!-- Ajout de la classe text-end pour aligner le contenu à droite -->
-              <button class="btn btn-outline-success" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" (click)="placeOrder()">Passer la commande</button>
+            <p>Total : €</p>
+            <div class="text-end">
+              <button class="btn btn-outline-success" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">Passer la commande</button>
             </div>
           </div>
         </div>
-
+      </div>
+    </div>
+  </div>
+  <h5 style="margin-left: 16%">Vos adresses </h5>
+  <hr style="width: 8%; margin-left: 16%">
+  <div class="row card2">
+    <div class="col-md-4" *ngFor="let ad of adresse">
+      <div class="card mb-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{ ad.typeAdresse?.libelle }}</h5>
+          <p class="card-text">{{ ad.rue }} {{ ad.complement }}</p>
+          <p class="card-text">{{ ad.codePostal }} {{ ad.ville }}</p>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-sm btn-danger" (click)="ad.id !== undefined ? deleteAdresse(ad.id) : null"><i
+                    class="fa fa-trash"></i></button>
+            <button class="btn btn-sm btn-info ms-2" [routerLink]="['/user/update-adresse', ad.id]"><i
+                    class="fa fa-edit"></i></button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

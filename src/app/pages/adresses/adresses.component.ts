@@ -7,10 +7,7 @@ import { HelperService } from '../../services/helper/helper.service';
 import { TypeAdresse } from '../../swagger/services/models/type-adresse';
 import { UtilisateurDto } from '../../swagger/services/models/utilisateur-dto';
 import { UtilisateursService } from '../../swagger/services/services/utilisateurs.service';
-import {map} from "rxjs/operators";
 import {AddressService} from "../../swagger/services/services/address.service";
-import {forkJoin} from "rxjs";
-import {Adresse} from "../../swagger/services/models/adresse";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
