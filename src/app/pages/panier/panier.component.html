@@ -18,7 +18,15 @@
       <div class="col-md-8">
         <div class="card mb-3" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
           <div class="card-body">
-            <h5 class="card-title">Mon panier</h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title">Mon panier</h5>
+              <button class="btn btn-sm btn-success" [routerLink]="['/user/commande']" style="margin-bottom: 15px" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle commande">
+                <i class="fas fa-plus"></i>
+              </button>
+
+
+            </div>
+
             <table class="table">
               <thead>
               <tr>
@@ -34,27 +42,27 @@
               <tr *ngFor="let commande of commandes; let i = index;">
                 <th scope="row">{{ i + 1 }}</th>
                 <td>
-                  <span class="label-text"><strong>Type :</strong></span>
-                  {{ getCategoryLibelle(commande.categorie) }} <br>
-                  <span class="label-text"><strong>Format :</strong></span> {{ commande.format }} <br>
-                  <span class="label-text"><strong>Impression en :</strong></span> {{ commande.couleur ? 'Couleur' : 'Noir et blanc' }}, <br>
-                  <span class="label-text"><strong>Impression en / :</strong></span> {{ commande.rectoVerso ? 'Recto verso' : 'Recto' }}
-                  <div>
-                    <span class="label-text"><strong>Nom du fichier :</strong></span> {{ commande.fileName }}<br>
-                    <!-- <span class="label-text"></span> <img [src]="fileUrl" alt="{{fileName}}"/> -->
-                    <br>
-                  </div>
+                <span class="label-text"><strong>Type :</strong></span>
+                {{ getCategoryLibelle(commande.categorie) }} <br>
+                <span class="label-text"><strong>Format :</strong></span> {{ commande.format }} <br>
+                <span class="label-text"><strong>Impression en :</strong></span> {{ commande.couleur ? 'Couleur' : 'Noir et blanc' }}, <br>
+                <span class="label-text"><strong>Impression en / :</strong></span> {{ commande.rectoVerso ? 'Recto verso' : 'Recto' }}
+                <div>
+                <span class="label-text"><strong>Nom du fichier :</strong></span> {{ commande.fileName }}<br>
+                <!-- <span class="label-text"></span> <img [src]="fileUrl" alt="{{fileName}}"/> -->
+                <br>
+          </div>
                 </td>
                 <td>
-                  <div class="d-flex justify-content-center align-items-center">
-                    <button class="btn btn-sm btn-outline-secondary me-2" (click)="decrementQuantity(commande)"><i class="fa fa-minus"></i></button>
-                    {{ commande.tirage }}
-                    <button class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementQuantity(commande)"><i class="fa fa-plus"></i></button>
-                  </div>
+                <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-sm btn-outline-secondary me-2" (click)="decrementQuantity(commande)"><i class="fa fa-minus"></i></button>
+                {{ commande.tirage }}
+                <button class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementQuantity(commande)"><i class="fa fa-plus"></i></button>
+          </div>
                 </td>
                 <td>5 €</td>
                 <td>{{ commande.prixTotal }} €</td>
-                <td><button class="btn btn-sm btn-danger" (click)="removeItem(commande)"><i class="fa fa-trash"></i></button></td>
+                <td><button class="btn btn-sm btn-danger" (click)="removeItem(commande)" data-toggle="tooltip" data-placement="top" title="Supprimer la commande"><i class="fa fa-trash"></i></button>
               </tr>
               </tbody>
             </table>
@@ -68,7 +76,8 @@
             <h5 class="card-title">Résumé de la commande</h5>
             <p>Total : €</p>
             <div class="text-end">
-              <button class="btn btn-outline-success" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">Passer la commande</button>
+              <button class="btn btn-outline-success"[routerLink]="['/user/paiment']" (click)="uploadFiles(); loadCart()" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">Passer la commande</button>
+
             </div>
           </div>
         </div>
@@ -78,20 +87,23 @@
   <h5 style="margin-left: 16%">Vos adresses </h5>
   <hr style="width: 8%; margin-left: 16%">
   <div class="row card2">
-    <div class="col-md-4" *ngFor="let ad of adresse">
+    <div class="col-md-3" *ngFor="let ad of adresse">
       <div class="card mb-3 shadow">
         <div class="card-body">
           <h5 class="card-title">{{ ad.typeAdresse?.libelle }}</h5>
           <p class="card-text">{{ ad.rue }} {{ ad.complement }}</p>
           <p class="card-text">{{ ad.codePostal }} {{ ad.ville }}</p>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-sm btn-danger" (click)="ad.id !== undefined ? deleteAdresse(ad.id) : null"><i
+            <button class="btn btn-sm btn-danger" (click)="ad.id !== undefined ? deleteAdresse(ad.id) : null"data-toggle="tooltip" data-placement="top" title="Supprimer votre adresse"><i
                     class="fa fa-trash"></i></button>
-            <button class="btn btn-sm btn-info ms-2" [routerLink]="['/user/update-adresse', ad.id]"><i
-                    class="fa fa-edit"></i></button>
+            <button class="btn btn-sm btn-info ms-2" [routerLink]="['/user/update-adresse', ad.id]"data-toggle="tooltip" data-placement="top" title="Modifier votre adresse"><i class="fa fa-edit"></i></button>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-md-1">
+      <button class="btn btn-sm btn-success" [routerLink]="['/user/add-adresse']"data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle adresse"><i class="fas fa-plus"></i></button>
+    </div>
   </div>
+
 </div>

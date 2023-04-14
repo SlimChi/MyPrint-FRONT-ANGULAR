@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
   constructor(private categorieService: CategoriesService) {}
 
   ngOnInit(): void {
+  this.categorieUser()
+  }
+
+  categorieUser(){
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = new JwtHelperService().decodeToken(token);

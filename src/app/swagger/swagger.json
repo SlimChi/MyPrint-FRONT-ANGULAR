@@ -1465,7 +1465,7 @@
         "tags": [
           "Fichiers"
         ],
-        "operationId": "uploadFile",
+        "operationId": "uploadFiles",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1476,8 +1476,11 @@
                 "type": "object",
                 "properties": {
                   "file": {
-                    "type": "string",
-                    "format": "binary"
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
                   }
                 }
               }
@@ -1546,7 +1549,25 @@
         }
       }
     },
-    "/categories/insert": {
+    "/categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "operationId": "getCategories",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Categories"
@@ -1905,35 +1926,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Fichiers"
-        ],
-        "operationId": "deleteFichier",
-        "parameters": [
-          {
-            "name": "idFichier",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseMessage"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/fichiers/{idFichier}/download": {
@@ -2019,26 +2011,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/categories": {
-      "get": {
-        "tags": [
-          "Categories"
-        ],
-        "operationId": "getCategories",
         "responses": {
           "200": {
             "description": "OK",

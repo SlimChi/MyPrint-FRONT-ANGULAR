@@ -185,59 +185,6 @@ export class CategoriesService extends BaseService {
   }
 
   /**
-   * Path part for operation insertCategorie
-   */
-  static readonly InsertCategoriePath = '/categories/insert';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `insertCategorie()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  insertCategorie$Response(params: {
-    body: CategorieDto
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<string>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CategoriesService.InsertCategoriePath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `insertCategorie$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  insertCategorie(params: {
-    body: CategorieDto
-  },
-  context?: HttpContext
-
-): Observable<string> {
-
-    return this.insertCategorie$Response(params,context).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
-    );
-  }
-
-  /**
    * Path part for operation getCategories
    */
   static readonly GetCategoriesPath = '/categories';
@@ -283,6 +230,59 @@ export class CategoriesService extends BaseService {
 ): Observable<string> {
 
     return this.getCategories$Response(params,context).pipe(
+      map((r: StrictHttpResponse<string>) => r.body as string)
+    );
+  }
+
+  /**
+   * Path part for operation insertCategorie
+   */
+  static readonly InsertCategoriePath = '/categories';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `insertCategorie()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  insertCategorie$Response(params: {
+    body: CategorieDto
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<string>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CategoriesService.InsertCategoriePath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<string>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `insertCategorie$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  insertCategorie(params: {
+    body: CategorieDto
+  },
+  context?: HttpContext
+
+): Observable<string> {
+
+    return this.insertCategorie$Response(params,context).pipe(
       map((r: StrictHttpResponse<string>) => r.body as string)
     );
   }

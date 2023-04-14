@@ -15,14 +15,12 @@ import {Router} from "@angular/router";
 })
 export class CommandeComponent implements OnInit {
   selectedFile: File | null = null;
-  selectedFiles: { id: number, name: string }[] = [];
   uploadForm: FormGroup;
   uploading: boolean = false;
   progress: number = 0;
   fileName: string = '';
   errorMessage: string = '';
   fileData: string | null = null;
-
   format: string = "a4";
   couleur: boolean = false;
   rectoVerso: boolean = false;
@@ -46,7 +44,7 @@ export class CommandeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loadData();
+
   }
 
   onFileSelected(event: any) {
@@ -72,27 +70,6 @@ export class CommandeComponent implements OnInit {
 
 
 
-
-  uploadFile() {
-    if (!this.selectedFile) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', this.selectedFile, this.selectedFile.name);
-    this.http.post('http://localhost:9090/fichiers', formData).subscribe(
-        (response) => {
-          console.log(response);
-          this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', {duration: 4000});
-        },
-        (error) => {
-          console.log(error);
-          this.snackBar.open(`Erreur lors du téléchargement du fichier: ${error.error}`, 'Fermer', {duration: 4000});
-        }
-    );
-  }
-
-
   storeFile(): void {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -110,6 +87,7 @@ export class CommandeComponent implements OnInit {
         };
 
         localStorage.setItem('file', JSON.stringify(file));
+
       }
     };
     reader.readAsDataURL(this.selectedFile as Blob);
@@ -182,8 +160,6 @@ export class CommandeComponent implements OnInit {
     if (event && event.target && event.target.value) {
       this.format = event.target.value;
       console.log('Format sélectionné :', this.format);
-      this.saveData(); // ajout de l'appel à la fonction saveData()
-
     }
   }
 
@@ -191,7 +167,7 @@ export class CommandeComponent implements OnInit {
 
       this.couleur = !this.couleur;
       console.log('Couleur:', this.couleur);
-      this.saveData();
+
 
   }
 
@@ -199,7 +175,7 @@ export class CommandeComponent implements OnInit {
 
       this.rectoVerso = !this.rectoVerso;
       console.log('RectoVerso:', this.rectoVerso);
-      this.saveData();
+
 
   }
 
@@ -232,30 +208,6 @@ export class CommandeComponent implements OnInit {
     });
   }
 
-  saveData() {
-    const commandeData = {
-      format: this.format,
-      couleur: this.couleur,
-      rectoVerso: this.rectoVerso,
-      tirage: this.tirage
-    };
-    localStorage.setItem('commandeData', JSON.stringify(commandeData));
-  }
-
-  loadData() {
-    try {
-      const commandeDataString = localStorage.getItem('commandeData');
-      if (commandeDataString) {
-        const commandeData = JSON.parse(commandeDataString);
-        this.format = commandeData.format;
-        this.couleur = commandeData.couleur;
-        this.rectoVerso = commandeData.rectoVerso;
-        this.tirage = commandeData.tirage;
-      }
-    } catch(error) {
-      console.error('Error parsing JSON data from local storage', error);
-    }
-  }
 
   isAuthenticated(): boolean {
     return this.tokenService.isLogged();

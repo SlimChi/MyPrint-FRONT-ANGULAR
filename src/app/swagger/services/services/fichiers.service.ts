@@ -73,26 +73,26 @@ export class FichiersService extends BaseService {
   }
 
   /**
-   * Path part for operation uploadFile
+   * Path part for operation uploadFiles
    */
-  static readonly UploadFilePath = '/fichiers';
+  static readonly UploadFilesPath = '/fichiers';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `uploadFile()` instead.
+   * To access only the response body, use `uploadFiles()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  uploadFile$Response(params?: {
+  uploadFiles$Response(params?: {
     body?: {
-'file': Blob;
+'file': Array<Blob>;
 }
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ResponseMessage>> {
 
-    const rb = new RequestBuilder(this.rootUrl, FichiersService.UploadFilePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, FichiersService.UploadFilesPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -111,20 +111,20 @@ export class FichiersService extends BaseService {
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `uploadFile$Response()` instead.
+   * To access the full response (for headers, for example), `uploadFiles$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  uploadFile(params?: {
+  uploadFiles(params?: {
     body?: {
-'file': Blob;
+'file': Array<Blob>;
 }
   },
   context?: HttpContext
 
 ): Observable<ResponseMessage> {
 
-    return this.uploadFile$Response(params,context).pipe(
+    return this.uploadFiles$Response(params,context).pipe(
       map((r: StrictHttpResponse<ResponseMessage>) => r.body as ResponseMessage)
     );
   }
@@ -179,59 +179,6 @@ export class FichiersService extends BaseService {
 
     return this.getFichierById$Response(params,context).pipe(
       map((r: StrictHttpResponse<string>) => r.body as string)
-    );
-  }
-
-  /**
-   * Path part for operation deleteFichier
-   */
-  static readonly DeleteFichierPath = '/fichiers/{idFichier}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteFichier()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteFichier$Response(params: {
-    idFichier: number;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<ResponseMessage>> {
-
-    const rb = new RequestBuilder(this.rootUrl, FichiersService.DeleteFichierPath, 'delete');
-    if (params) {
-      rb.path('idFichier', params.idFichier, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<ResponseMessage>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteFichier$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteFichier(params: {
-    idFichier: number;
-  },
-  context?: HttpContext
-
-): Observable<ResponseMessage> {
-
-    return this.deleteFichier$Response(params,context).pipe(
-      map((r: StrictHttpResponse<ResponseMessage>) => r.body as ResponseMessage)
     );
   }
 

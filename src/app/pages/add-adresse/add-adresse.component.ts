@@ -93,6 +93,10 @@ export class AddAdresseComponent implements OnInit{
       });
     }
   }
+  async back() {
+    window.history.back();
+  }
+
 
 
 
