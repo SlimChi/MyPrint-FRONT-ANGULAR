@@ -13,9 +13,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "lodash"
-            ],
             "outputPath": "dist/front-my-print",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CategoriesService } from '../../swagger/services/services/categories.service';
-import { CategorieDto } from '../../swagger/services/models/categorie-dto';
 
 @Component({
   selector: 'app-home',
@@ -39,6 +38,7 @@ export class HomeComponent implements OnInit {
     this.categories.push({ idCategorie, libelle });
     console.log('Catégorie ajoutée : ', { idCategorie, libelle });
     localStorage.setItem('categories', JSON.stringify(this.categories));
+
   }
 
 

@@ -71,28 +71,11 @@ export class PanierComponent {
     decrementQuantity(item: any) {
         if (item.tirage > 1) {
             item.tirage--;
-            item.prixTotal -= item.prixUnitaire;
-            this.total -= item.prixUnitaire;
-            // Mettre à jour l'objet dans le tableau commandes
-            const index = this.commandes.indexOf(item);
-            if (index !== -1) {
-                this.commandes[index] = item;
-                // Mettre à jour le panier dans le localStorage
-                localStorage.setItem('panier', JSON.stringify(this.commandes));
-            }
         }
     }
     incrementQuantity(item: any) {
         item.tirage++;
-        item.prixTotal += item.prixUnitaire;
-        this.total += item.prixUnitaire;
-        // Mettre à jour l'objet dans le tableau commandes
-        const index = this.commandes.indexOf(item);
-        if (index !== -1) {
-            this.commandes[index] = item;
-            // Mettre à jour le panier dans le localStorage
-            localStorage.setItem('panier', JSON.stringify(this.commandes));
-        }
+
     }
 
 

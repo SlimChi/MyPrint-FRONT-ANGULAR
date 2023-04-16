@@ -22,7 +22,7 @@
   margin-bottom: 50px;
 }
 .custom-width {
-  width: 230px; /* ajuster la largeur selon vos besoins */
+  width: 250px; /* ajuster la largeur selon vos besoins */
 }
 .input-group-prepend, .input-group-append {
   height: 38px;
@@ -36,6 +36,15 @@
 
 .btn-commande {
   position: absolute;
-  margin-top: 20px;
-  right: 0;
+  margin-top: 25px;
+  margin-left: 10%;
+}
+.custom-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
 }
