@@ -7,6 +7,9 @@ import {HelperService} from "../../services/helper/helper.service";
 import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
+import {DomSanitizer} from "@angular/platform-browser";
+
+
 
 @Component({
     selector: 'app-panier',
@@ -31,6 +34,7 @@ export class PanierComponent {
                 private helperService: HelperService,
                 private snackBar: MatSnackBar,
                 private http: HttpClient,
+                private sanitizer: DomSanitizer
                                                     ) {
     }
 
@@ -40,24 +44,20 @@ export class PanierComponent {
         this.getUserAdresse()
         this.loadCart()
     }
-    getUserAdresse() {
-        // Récupération du user
-        this.userService.findAll(this.helperService.userId).subscribe((user) => {
-            this.user = user;
-        });
-        // Récupération des types d'adresse
-        this.getAllTypeAdresse();
-    }
+
     loadCart() {
         try {
-            const panierData: string | null = localStorage.getItem('panier');
-            if (panierData !== null) {
-                this.commandes = JSON.parse(panierData);
+            const donneesLocalStoragePanier: string | null = localStorage.getItem('panier');
+            if (typeof donneesLocalStoragePanier === 'string') {
+                this.commandes = JSON.parse(donneesLocalStoragePanier);
             }
         } catch (error) {
-            // Gérer l'erreur ici
+            console.error(error);
+            // Afficher un message d'erreur à l'utilisateur ou journaliser l'erreur
         }
     }
+
+
     getCategoryLibelle(categorieId: number) {
         const categoriesDataString = localStorage.getItem('categories');
         if (categoriesDataString) {
@@ -68,16 +68,23 @@ export class PanierComponent {
             return '';
         }
     }
+
     decrementQuantity(item: any) {
         if (item.tirage > 1) {
             item.tirage--;
+            item.prix = (0.10 * (item.nbrPages * item.tirage)).toFixed(2) + " €";
+            localStorage.setItem('panier', JSON.stringify(this.commandes));
+
+
         }
     }
+
     incrementQuantity(item: any) {
         item.tirage++;
+        item.prix = (0.10 * (item.nbrPages * item.tirage)).toFixed(2) + " €";
+        localStorage.setItem('panier', JSON.stringify(this.commandes));
 
     }
-
 
     // function to remove an item from the cart
 // Supprime un fichier du local storage
@@ -104,9 +111,6 @@ export class PanierComponent {
         }
     }
 
-
-
-
     private findById() {
         this.adresseService.findAll1(this.helperService.userId).subscribe({
             next: (adresses) => {
@@ -119,6 +123,14 @@ export class PanierComponent {
         });
     }
 
+    getUserAdresse() {
+        // Récupération du user
+        this.userService.findAll(this.helperService.userId).subscribe((user) => {
+            this.user = user;
+        });
+        // Récupération des types d'adresse
+        this.getAllTypeAdresse();
+    }
 
     private getAllTypeAdresse() { // étape 2
         this.adresseService.findAll1().subscribe({

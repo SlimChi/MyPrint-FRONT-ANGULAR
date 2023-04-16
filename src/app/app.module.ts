@@ -54,6 +54,10 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     PaimentComponent,
     MoncompteComponent,
     FooterComponent,
+
+
+
+
   ],
     imports: [
         BrowserModule,
@@ -69,6 +73,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
         ReactiveFormsModule,
         ToastrModule.forRoot(),
         MatSnackBarModule,
+
         // StripeModule.forRoot('your_stripe_publishable_key')
     ],
   providers: [
