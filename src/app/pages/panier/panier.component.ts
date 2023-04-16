@@ -34,7 +34,7 @@ export class PanierComponent {
                 private helperService: HelperService,
                 private snackBar: MatSnackBar,
                 private http: HttpClient,
-                private sanitizer: DomSanitizer
+                private sanitizer: DomSanitizer,
                                                     ) {
     }
 
@@ -56,6 +56,26 @@ export class PanierComponent {
             // Afficher un message d'erreur à l'utilisateur ou journaliser l'erreur
         }
     }
+    getTotal(): string | undefined {
+        let total = 0;
+        let panier = localStorage.getItem("panier");
+        if (panier !== null) {
+            let panierObj = JSON.parse(panier);
+            for (let commande of panierObj) {
+                if (typeof commande === 'object' && commande !== null && 'prix' in commande) {
+                    let prix = parseFloat(commande.prix);
+                    console.log("prix = ", prix);
+                    if (!isNaN(prix)) {
+                        total += prix;
+                    }
+                }
+            }
+            return total.toFixed(2) + " €";
+        } else {
+            return undefined;
+        }
+    }
+
 
 
     getCategoryLibelle(categorieId: number) {
