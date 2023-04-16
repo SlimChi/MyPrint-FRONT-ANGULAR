@@ -91,7 +91,7 @@ export class CommandeComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = (event) => {
             if (event.target) {
-                this.fileData = event.target.result as string; // update the value of fileData
+                this.fileData = event.target.result as string; // mettre à jour la valeur de fileData
                 const fileName = this.selectedFile?.name ?? '';
                 const fileSize = this.selectedFile?.size ?? 0;
                 const fileDate = new Date();
@@ -100,17 +100,25 @@ export class CommandeComponent implements OnInit {
                     name: fileName,
                     size: fileSize,
                     date: fileDate,
-                    data: this.fileData, // use the updated value of fileData
+                    data: this.fileData, // utiliser la valeur mise à jour de fileData
                     nbrPages : this.numPages
                 };
 
-                localStorage.setItem('file', JSON.stringify(file));
+                // Récupérer la liste des fichiers à partir du localstorage
+                const fileListString = localStorage.getItem('fileList');
+                const fileList = fileListString ? JSON.parse(fileListString) : [];
 
+                // Ajouter le nouveau fichier à la liste des fichiers
+                fileList.push(file);
+
+                // Sauvegarder la liste des fichiers dans le localstorage
+                localStorage.setItem('fileList', JSON.stringify(fileList));
             }
         };
         reader.readAsDataURL(this.selectedFile as Blob);
         this.ajouterAuPanier();
     }
+
 
 
     ajouterAuPanier(): void {
@@ -159,9 +167,6 @@ export class CommandeComponent implements OnInit {
 
     }
 
-
-
-
     onDragOver(event: DragEvent) {
         event.preventDefault();
         event.stopPropagation();
@@ -180,7 +185,6 @@ export class CommandeComponent implements OnInit {
             file: file
         });
     }
-
 
     selectFormat(event: any) {
 
@@ -206,18 +210,6 @@ export class CommandeComponent implements OnInit {
 
     }
 
-
-    incrementTirage() {
-        this.tirage++;
-    }
-
-    decrementTirage() {
-        if (this.tirage > 1) {
-            this.tirage--;
-        }
-    }
-
-
     deleteUploadedFile() {
         const confirmationSnackBar = this.snackBar.open('Êtes-vous sûr de vouloir supprimer ce fichier ?', 'Supprimer', {
             duration: 5000,
@@ -236,7 +228,6 @@ export class CommandeComponent implements OnInit {
             });
         });
     }
-
 
     isAuthenticated(): boolean {
         return this.tokenService.isLogged();

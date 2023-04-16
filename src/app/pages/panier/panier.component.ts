@@ -186,7 +186,7 @@ export class PanierComponent {
     }
 
     uploadFiles() {
-        const files = JSON.parse(localStorage.getItem('files') || '[]');
+        const files = JSON.parse(localStorage.getItem('fileList') || '[]');
         const formData = new FormData();
 
         // append each file to the form data
