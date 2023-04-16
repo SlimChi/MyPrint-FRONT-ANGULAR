@@ -87,7 +87,7 @@
                   <p style="width: 220px;">Prix : {{ (0.10 * (numPages * tirage)).toFixed(2) }} €</p>
 
                 <div class="btncommande mt-3">
-                  <button type="button" class="btn btn-outline-success btn-block btn-commande" (click)="onCommanderClicked();storeFile()" [disabled]="uploading || !selectedFile">Ajouter au panier</button>
+                  <button type="button" class="btn btn-outline-success btn-block btn-commande" (click)="storeFile();onCommanderClicked()" [disabled]="uploading || !selectedFile">Ajouter au panier</button>
                 </div>
               </div>
             </div>

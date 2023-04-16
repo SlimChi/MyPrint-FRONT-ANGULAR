@@ -109,6 +109,7 @@ export class CommandeComponent implements OnInit {
             }
         };
         reader.readAsDataURL(this.selectedFile as Blob);
+        this.ajouterAuPanier();
     }
 
 
@@ -243,10 +244,8 @@ export class CommandeComponent implements OnInit {
 
     onCommanderClicked(): void {
         if (this.isAuthenticated()) {
-            this.ajouterAuPanier();
             this.router.navigate(['/user/panier']);
         } else {
-            this.ajouterAuPanier();
             this.router.navigate(['/user']);
         }
     }
