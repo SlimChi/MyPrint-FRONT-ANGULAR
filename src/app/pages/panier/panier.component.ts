@@ -109,11 +109,11 @@ export class PanierComponent {
     // function to remove an item from the cart
 // Supprime un fichier du local storage
     removeFileFromLocalStorage(fileId: string) {
-        const files = JSON.parse(localStorage.getItem('files') || '[]');
+        const files = JSON.parse(localStorage.getItem('fileList') || '[]');
         const fileIndex = files.findIndex((file: any) => file.id === fileId);
         if (fileIndex !== -1) {
             files.splice(fileIndex, 1);
-            localStorage.setItem('files', JSON.stringify(files));
+            localStorage.setItem('fileList', JSON.stringify(files));
         }
     }
 
@@ -197,17 +197,18 @@ export class PanierComponent {
         }
 
         // send the form data to the server
-        this.http.post('http://localhost:9090/fichiers', formData).subscribe(
-            (response) => {
+        this.http.post('http://localhost:9090/fichiers', formData).subscribe({
+            next: (response) => {
                 console.log(response);
                 this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', { duration: 4000 });
             },
-            (error) => {
+            error: (error) => {
                 console.log(error);
                 this.snackBar.open(`Erreur lors du téléchargement du fichier: ${error.error}`, 'Fermer', { duration: 4000 });
-            }
-        );
+            },
+        });
     }
+
 
 
 
