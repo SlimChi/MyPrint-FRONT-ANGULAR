@@ -32,6 +32,8 @@ import { MoncompteComponent } from './pages/moncompte/moncompte.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import {ToastrModule} from "ngx-toastr";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { SuccessPaimentComponent } from './pages/success-paiment/success-paiment.component';
+import {NgxBraintreeModule} from "ngx-braintree";
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     PaimentComponent,
     MoncompteComponent,
     FooterComponent,
+    SuccessPaimentComponent,
 
 
 
@@ -73,8 +76,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
         ReactiveFormsModule,
         ToastrModule.forRoot(),
         MatSnackBarModule,
-
-        // StripeModule.forRoot('your_stripe_publishable_key')
+        NgxBraintreeModule
     ],
   providers: [
     {

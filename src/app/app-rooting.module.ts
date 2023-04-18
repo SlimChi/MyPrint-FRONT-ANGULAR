@@ -18,6 +18,7 @@ import {AddAdresseComponent} from "./pages/add-adresse/add-adresse.component";
 import {CommandeComponent} from "./pages/commande/commande.component";
 import {MoncompteComponent} from "./pages/moncompte/moncompte.component";
 import {PaimentComponent} from "./pages/paiment/paiment.component";
+import {SuccessPaimentComponent} from "./pages/success-paiment/success-paiment.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,8 @@ const routes: Routes = [
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'response-password', component: ResponseResetPasswordComponent},
   {path: 'commande', component: CommandeComponent},
+  {path: 'paiment', component: PaimentComponent},
+  {path: 'successPaiment', component: SuccessPaimentComponent},
 
 
   {

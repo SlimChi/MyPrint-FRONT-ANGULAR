@@ -70,7 +70,7 @@ export class PanierComponent {
                     }
                 }
             }
-            return total.toFixed(2) + " €";
+            return total.toFixed(2);
         } else {
             return undefined;
         }
@@ -92,7 +92,7 @@ export class PanierComponent {
     decrementQuantity(item: any) {
         if (item.tirage > 1) {
             item.tirage--;
-            item.prix = (0.10 * (item.nbrPages * item.tirage)).toFixed(2) + " €";
+            item.prix = (0.10 * (item.nbrPages * item.tirage)).toFixed(2);
             localStorage.setItem('panier', JSON.stringify(this.commandes));
 
 
@@ -101,7 +101,7 @@ export class PanierComponent {
 
     incrementQuantity(item: any) {
         item.tirage++;
-        item.prix = (0.10 * (item.nbrPages * item.tirage)).toFixed(2) + " €";
+        item.prix = (0.10 * (item.nbrPages * item.tirage)).toFixed(2);
         localStorage.setItem('panier', JSON.stringify(this.commandes));
 
     }
@@ -109,11 +109,11 @@ export class PanierComponent {
     // function to remove an item from the cart
 // Supprime un fichier du local storage
     removeFileFromLocalStorage(fileId: string) {
-        const files = JSON.parse(localStorage.getItem('files') || '[]');
+        const files = JSON.parse(localStorage.getItem('fileList') || '[]');
         const fileIndex = files.findIndex((file: any) => file.id === fileId);
         if (fileIndex !== -1) {
             files.splice(fileIndex, 1);
-            localStorage.setItem('files', JSON.stringify(files));
+            localStorage.setItem('fileList', JSON.stringify(files));
         }
     }
 

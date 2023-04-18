@@ -150,7 +150,7 @@ export class CommandeComponent implements OnInit {
                     nbrPages: this.numPages,
                     fileData: fileData !== null ? JSON.parse(fileData).data : null,
                     lastCategory: lastCategoryLabel,// Ajout du libellé de la dernière catégorie
-                    prix: (0.10 * (this.numPages * this.tirage)).toFixed(2) + ' €' // Ajout du prix calculé
+                    prix: (0.10 * (this.numPages * this.tirage)).toFixed(2)// Ajout du prix calculé
 
                 };
                 panier.push(newOrder);
