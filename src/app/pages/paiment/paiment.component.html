@@ -1,10 +1,10 @@
 
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center"*ngIf="getTotal() > 0">
     <div class="container d-flex justify-content-center">
         <h2>Montant total: {{ getTotal()?.toFixed(2) }} €</h2>
     </div>
 </div>
-    <div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center" *ngIf="getTotal() > 0">
         <ngx-braintree
                 [getClientToken]="getClientToken.bind(this)"
                 [createPurchase]="checkOut.bind(this)"

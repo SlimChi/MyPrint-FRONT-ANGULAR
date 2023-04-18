@@ -84,7 +84,9 @@
             <p>Total : {{ getTotal() }} </p>
 
             <div class="text-end">
-              <button class="btn btn-outline-success"[routerLink]="['/user/paiment']" (click)="uploadFiles(); loadCart()" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">Passer la commande</button>
+              <button class="btn btn-outline-success" [routerLink]="['/user/paiment']" (click)="uploadFiles(); loadCart()"
+                      style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" [disabled]="+getTotal() === 0">Passer la commande</button>
+
 
             </div>
           </div>

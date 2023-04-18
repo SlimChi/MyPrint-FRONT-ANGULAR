@@ -79,34 +79,11 @@ export class PaimentComponent implements OnInit {
         );
     }
 
-
-
-// Supprime un item du panier et son fichier associé
 // Supprime le panier
     removePanier() {
         this.commandes = [];
         localStorage.removeItem('panier');
     }
 
-// Supprime un item du panier et son fichier associé
-    removeItem(index: number) {
-        // Supprime le fichier du local storage
-        const fileId = this.commandes[index].id;
-        this.removeFileFromLocalStorage(fileId);
-
-        // Supprime l'item du panier
-        this.commandes.splice(index, 1);
-        localStorage.setItem('panier', JSON.stringify(this.commandes));
-    }
-
-
-    removeFileFromLocalStorage(fileId: string) {
-        const files = JSON.parse(localStorage.getItem('fileList') || '[]');
-        const fileIndex = files.findIndex((file: any) => file.id === fileId);
-        if (fileIndex !== -1) {
-            files.splice(fileIndex, 1);
-            localStorage.setItem('fileList', JSON.stringify(files));
-        }
-    }
 
 }

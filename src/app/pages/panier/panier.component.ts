@@ -56,7 +56,7 @@ export class PanierComponent {
             // Afficher un message d'erreur à l'utilisateur ou journaliser l'erreur
         }
     }
-    getTotal(): string | undefined {
+    getTotal(): number | undefined {
         let total = 0;
         let panier = localStorage.getItem("panier");
         if (panier !== null) {
@@ -70,7 +70,7 @@ export class PanierComponent {
                     }
                 }
             }
-            return total.toFixed(2);
+            return parseFloat(total.toFixed(2));
         } else {
             return undefined;
         }
