@@ -21,6 +21,7 @@ import {PaimentComponent} from "./pages/paiment/paiment.component";
 import {SuccessPaimentComponent} from "./pages/success-paiment/success-paiment.component";
 import {StatusResponseComponent} from "./pages/status-response/status-response.component";
 import {TermsConditionsComponent} from "./pages/terms-conditions/terms-conditions.component";
+import {FaqPageComponent} from "./pages/faq-page/faq-page.component";
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'paiment', component: PaimentComponent},
   {path: 'successPaiment', component: SuccessPaimentComponent},
   {path: 'termsConditions', component: TermsConditionsComponent},
+  {path: 'faq', component: FaqPageComponent},
 
 
   {
