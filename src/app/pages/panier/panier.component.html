@@ -1,6 +1,12 @@
-<button class="btn btn-sm btn-outline-secondary position-absolute top-2 start-0 mt-3 ms-3" (click)="back()" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
-  Page précédente
-</button>
+<div class="container d-flex justify-content-center" *ngIf="commandes.length === 0"  style="margin-bottom: 25%; margin-top: 20%">
+  <div class="alert alert-warning" role="alert">
+    Votre panier est vide. Veuillez ajouter des commandes !! <br>
+    <button class="btn btn-sm btn-success" style="margin-left: 20%; margin-top: 5%" [routerLink]="['/user/home']" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle commande">
+      <i class="fas fa-plus"></i>Ajouter une nouvelle commande
+    </button>
+  </div>
+</div>
+<div *ngIf="commandes.length > 0" class="div1" style="min-height: calc(100vh - 200px); padding-bottom: 100px;">
 
 <div class="div1" style="min-height: calc(100vh - 200px); padding-bottom: 100px;">
   <div class="div1 d-flex align-items-center" style="margin-left: 15%">
@@ -116,4 +122,5 @@
     </div>
   </div>
 
+</div>
 </div>
