@@ -19,6 +19,7 @@ import {CommandeComponent} from "./pages/commande/commande.component";
 import {MoncompteComponent} from "./pages/moncompte/moncompte.component";
 import {PaimentComponent} from "./pages/paiment/paiment.component";
 import {SuccessPaimentComponent} from "./pages/success-paiment/success-paiment.component";
+import {StatusResponseComponent} from "./pages/status-response/status-response.component";
 
 
 const routes: Routes = [
@@ -63,6 +64,7 @@ const routes: Routes = [
       {path: 'paiment', component: PaimentComponent},
       {path: 'moncompte', component: MoncompteComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
+      {path: 'status', component: StatusResponseComponent},
 
       {
         path: '', redirectTo: 'user/home',

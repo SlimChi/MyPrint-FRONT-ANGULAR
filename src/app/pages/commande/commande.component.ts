@@ -53,7 +53,7 @@ export class CommandeComponent implements OnInit {
         const file = event.target.files[0] as File;
 
         if (file.size > MAX_FILE_SIZE) {
-            this.snackBar.open('Le fichier sélectionné dépasse la limite de taille de ${MAX_FILE_SIZE} Mo', 'Fermer', {
+            this.snackBar.open(`Le fichier sélectionné dépasse la taille limite : ${MAX_FILE_SIZE / (1024 * 1024)} Mo`, 'Fermer', {
                 duration: 4000
             });
             this.selectedFile = null;
@@ -69,6 +69,7 @@ export class CommandeComponent implements OnInit {
             duration: 4000
         });
     }
+
 
 
     countPdfPages() {

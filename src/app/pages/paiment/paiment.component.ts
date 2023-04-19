@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 export class PaimentComponent implements OnInit {
     amount: number; // initialiser la variable amount en tant que nombre
     commandes: any[] = [];
-    cardholderName: string;
-    cvv: string;
+
     constructor(private paymentService: PaymentService, private router: Router) {}
 
     ngOnInit(): void {
@@ -25,7 +24,7 @@ export class PaimentComponent implements OnInit {
             // Paiement réussi
             console.log('Paiement réussi : ' + event.transactionId);
             // Afficher un message de confirmation et rediriger l'utilisateur vers une page de succès de paiement
-            this.router.navigate(['/successPaiment']);
+            this.router.navigate(['/status']);
             this.removePanier();
         } else if (event?.error) {
             // Paiement échoué

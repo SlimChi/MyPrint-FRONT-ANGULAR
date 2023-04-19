@@ -34,6 +34,7 @@ import {ToastrModule} from "ngx-toastr";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { SuccessPaimentComponent } from './pages/success-paiment/success-paiment.component';
 import {NgxBraintreeModule} from "ngx-braintree";
+import { StatusResponseComponent } from './pages/status-response/status-response.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {NgxBraintreeModule} from "ngx-braintree";
     MoncompteComponent,
     FooterComponent,
     SuccessPaimentComponent,
+    StatusResponseComponent,
 
 
 

@@ -2,7 +2,6 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Paiement</h5>
-            <p class="card-text">Montant total: <span class="font-weight-bold">{{ getTotal()?.toFixed(2) }} €</span></p>
             <ngx-braintree
                     [getClientToken]="getClientToken.bind(this)"
                     [createPurchase]="checkOut.bind(this)"
@@ -11,6 +10,34 @@
                     (paymentStatus)="onPaymentStatus($event)"
                     [buttonText]="'Payer'">
             </ngx-braintree>
+        </div>
+    </div>
+    <!-- Right -->
+    <div class="col-lg-3">
+        <div class="card position-sticky top-0">
+            <div class="p-3 bg-light bg-opacity-10">
+                <h6 class="card-title mb-3">Récaputulatif de la commande</h6>
+                <div class="d-flex justify-content-between mb-1 small">
+                    <span>Prix : </span> <span>{{ getTotal()?.toFixed(2) }} €</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-4 small">
+                    <span>TOTAL</span> <strong class="text-dark">{{ getTotal()?.toFixed(2) }} €</strong>
+                </div>
+                <div class="form-check mb-1 small">
+                    <input class="form-check-input" type="checkbox" value="" id="tnc">
+                    <label class="form-check-label" for="tnc">
+                        I agree to the <a href="#">terms and conditions</a>
+                    </label>
+                </div>
+                <div class="form-check mb-3 small">
+                    <input class="form-check-input" type="checkbox" value="" id="subscribe">
+                    <label class="form-check-label" for="subscribe">
+                        Get emails about product updates and events. If you change your mind, you can unsubscribe at any time. <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
