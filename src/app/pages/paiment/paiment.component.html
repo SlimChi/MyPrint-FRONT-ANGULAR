@@ -1,16 +1,16 @@
-
-<div class="container d-flex justify-content-center"*ngIf="getTotal() > 0">
-    <div class="container d-flex justify-content-center">
-        <h2>Montant total: {{ getTotal()?.toFixed(2) }} €</h2>
+<div class="custom-container container d-flex justify-content-center" style="margin-top: 5%" *ngIf="getTotal() > 0">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Paiement</h5>
+            <p class="card-text">Montant total: <span class="font-weight-bold">{{ getTotal()?.toFixed(2) }} €</span></p>
+            <ngx-braintree
+                    [getClientToken]="getClientToken.bind(this)"
+                    [createPurchase]="checkOut.bind(this)"
+                    [chargeAmount]="getTotal()"
+                    [showCardholderName]= true
+                    (paymentStatus)="onPaymentStatus($event)"
+                    [buttonText]="'Payer'">
+            </ngx-braintree>
+        </div>
     </div>
 </div>
-<div class="container d-flex justify-content-center" *ngIf="getTotal() > 0">
-        <ngx-braintree
-                [getClientToken]="getClientToken.bind(this)"
-                [createPurchase]="checkOut.bind(this)"
-                [chargeAmount]="getTotal()"
-                (paymentStatus)="onPaymentStatus($event)"
-                [buttonText]="'Payer'">
-        </ngx-braintree>
-    </div>
-

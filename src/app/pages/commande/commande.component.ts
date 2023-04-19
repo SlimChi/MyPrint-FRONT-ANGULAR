@@ -49,11 +49,11 @@ export class CommandeComponent implements OnInit {
     }
 
     onFileSelected(event: any) {
-        const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+        const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 Mo
         const file = event.target.files[0] as File;
 
         if (file.size > MAX_FILE_SIZE) {
-            this.snackBar.open(`Le fichier sélectionné dépasse la limite de taille de ${MAX_FILE_SIZE} Mo`, 'Fermer', {
+            this.snackBar.open('Le fichier sélectionné dépasse la limite de taille de ${MAX_FILE_SIZE} Mo', 'Fermer', {
                 duration: 4000
             });
             this.selectedFile = null;

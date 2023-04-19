@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 export class PaimentComponent implements OnInit {
     amount: number; // initialiser la variable amount en tant que nombre
     commandes: any[] = [];
-
+    cardholderName: string;
+    cvv: string;
     constructor(private paymentService: PaymentService, private router: Router) {}
 
     ngOnInit(): void {
@@ -20,7 +21,21 @@ export class PaimentComponent implements OnInit {
     }
 
     onPaymentStatus(event): void {
-// à compléter
+        if (event?.success) {
+            // Paiement réussi
+            console.log('Paiement réussi : ' + event.transactionId);
+            // Afficher un message de confirmation et rediriger l'utilisateur vers une page de succès de paiement
+            this.router.navigate(['/successPaiment']);
+            this.removePanier();
+        } else if (event?.error) {
+            // Paiement échoué
+            console.error('Erreur de paiement : ' + event.errorMessage);
+            // Afficher un message d'erreur et inviter l'utilisateur à réessayer ou à contacter le support
+            alert('Le paiement a échoué. Veuillez réessayer ou contacter le support.');
+        } else {
+            // Autre état de paiement
+            console.log('État de paiement inconnu : ' + event?.status);
+        }
     }
 
     loadCart() {
@@ -33,7 +48,7 @@ export class PaimentComponent implements OnInit {
             }
         } catch (error) {
             console.error(error);
-// Afficher un message d'erreur à l'utilisateur ou journaliser l'erreur
+                // Afficher un message d'erreur à l'utilisateur ou journaliser l'erreur
         }
     }
 
@@ -45,7 +60,7 @@ export class PaimentComponent implements OnInit {
             for (let commande of panierObj) {
                 if (typeof commande === 'object' && commande !== null && 'prix' in commande) {
                     let prix = parseFloat(commande.prix);
-                    console.log('prix = ', prix);
+                    // console.log('prix = ', prix);
                     if (!isNaN(prix)) {
                         total += prix;
                     }
@@ -65,11 +80,11 @@ export class PaimentComponent implements OnInit {
         );
     }
 
-    checkOut(nonce: string): Observable<any> {
+    checkOut(nonce: string, cardholderName: string, cvv: string): Observable<any> {
         console.log('Nonce : ' + nonce);
 
         this.amount = this.getTotal();
-        const dto = new PurchaseDto(nonce, this.amount);
+        const dto = new PurchaseDto(nonce, this.amount, cardholderName, cvv);
 
         return this.paymentService.checkOut(dto).pipe(
             tap(() => {
@@ -78,6 +93,7 @@ export class PaimentComponent implements OnInit {
             })
         );
     }
+
 
 // Supprime le panier
     removePanier() {

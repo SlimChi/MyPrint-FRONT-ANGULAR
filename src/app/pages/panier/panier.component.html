@@ -68,7 +68,7 @@
                 <button class="btn btn-sm btn-outline-secondary ms-2" (click)="incrementQuantity(commande)"><i class="fa fa-plus"></i></button>
               </div>
                 </td>
-                <td>{{ commande.prix }}  </td>
+                <td>{{ commande.prix }} € </td>
                 <td><button class="btn btn-sm btn-danger" (click)="removeItem(commande)" data-toggle="tooltip" data-placement="top" title="Supprimer la commande"><i class="fa fa-trash"></i></button>
               </tr>
               </tbody>
@@ -81,7 +81,7 @@
         <div class="card mb-3" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
           <div class="card-body">
             <h5 class="card-title">Résumé de la commande</h5>
-            <p>Total : {{ getTotal() }} </p>
+            <p>Total : {{ getTotal() }} € </p>
 
             <div class="text-end">
               <button class="btn btn-outline-success" [routerLink]="['/user/paiment']" (click)="uploadFiles(); loadCart()"

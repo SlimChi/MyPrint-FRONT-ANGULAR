@@ -5,3 +5,15 @@
 .card2{
     margin-left: 15%;
 }
+
+@media (max-width: 991px) {
+    .ml-md-15percent {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .ml-md-15percent {
+        margin-left: 15%;
+    }
+}

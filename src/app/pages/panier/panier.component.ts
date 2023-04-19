@@ -70,11 +70,12 @@ export class PanierComponent {
                     }
                 }
             }
-            return parseFloat(total.toFixed(2));
+            return Number(total.toFixed(2));
         } else {
             return undefined;
         }
     }
+
 
 
 
