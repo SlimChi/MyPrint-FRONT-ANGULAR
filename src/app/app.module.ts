@@ -35,6 +35,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { SuccessPaimentComponent } from './pages/success-paiment/success-paiment.component';
 import {NgxBraintreeModule} from "ngx-braintree";
 import { StatusResponseComponent } from './pages/status-response/status-response.component';
+import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { StatusResponseComponent } from './pages/status-response/status-response
     FooterComponent,
     SuccessPaimentComponent,
     StatusResponseComponent,
+    TermsConditionsComponent,
 
 
 

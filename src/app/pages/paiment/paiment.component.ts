@@ -24,7 +24,7 @@ export class PaimentComponent implements OnInit {
             // Paiement réussi
             console.log('Paiement réussi : ' + event.transactionId);
             // Afficher un message de confirmation et rediriger l'utilisateur vers une page de succès de paiement
-            this.router.navigate(['/status']);
+            this.router.navigate(['/successPaiment']);
             this.removePanier();
         } else if (event?.error) {
             // Paiement échoué
@@ -65,7 +65,7 @@ export class PaimentComponent implements OnInit {
                     }
                 }
             }
-            return total;
+            return parseFloat(total.toFixed(2));
         } else {
             return undefined;
         }

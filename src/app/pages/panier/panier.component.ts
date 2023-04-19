@@ -26,7 +26,6 @@ export class PanierComponent {
     commandes: any[] = [];
     categories: any[] = [];
     file: string ='';
-    selectedFiles: File | null = null;
 
 
     constructor(private adresseService: AddressService,
@@ -34,7 +33,7 @@ export class PanierComponent {
                 private helperService: HelperService,
                 private snackBar: MatSnackBar,
                 private http: HttpClient,
-                private sanitizer: DomSanitizer,
+
                                                     ) {
     }
 
@@ -56,7 +55,8 @@ export class PanierComponent {
             // Afficher un message d'erreur à l'utilisateur ou journaliser l'erreur
         }
     }
-    getTotal(): number | undefined {
+
+    getTotal(): string | undefined {
         let total = 0;
         let panier = localStorage.getItem("panier");
         if (panier !== null) {
@@ -70,13 +70,12 @@ export class PanierComponent {
                     }
                 }
             }
-            return Number(total.toFixed(2));
+            let totalFormatted = total.toFixed(2);
+            return `${totalFormatted}`;
         } else {
             return undefined;
         }
     }
-
-
 
 
     getCategoryLibelle(categorieId: number) {
@@ -108,7 +107,7 @@ export class PanierComponent {
     }
 
     // function to remove an item from the cart
-// Supprime un fichier du local storage
+    // Supprime un fichier du local storage
     removeFileFromLocalStorage(fileId: string) {
         const files = JSON.parse(localStorage.getItem('fileList') || '[]');
         const fileIndex = files.findIndex((file: any) => file.id === fileId);
@@ -118,7 +117,7 @@ export class PanierComponent {
         }
     }
 
-// Supprime un item du panier et son fichier associé
+    // Supprime un item du panier et son fichier associé
     removeItem(item: any) {
         const index = this.commandes.indexOf(item);
         if (index !== -1) {

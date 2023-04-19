@@ -20,6 +20,7 @@ import {MoncompteComponent} from "./pages/moncompte/moncompte.component";
 import {PaimentComponent} from "./pages/paiment/paiment.component";
 import {SuccessPaimentComponent} from "./pages/success-paiment/success-paiment.component";
 import {StatusResponseComponent} from "./pages/status-response/status-response.component";
+import {TermsConditionsComponent} from "./pages/terms-conditions/terms-conditions.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'commande', component: CommandeComponent},
   {path: 'paiment', component: PaimentComponent},
   {path: 'successPaiment', component: SuccessPaimentComponent},
+  {path: 'termsConditions', component: TermsConditionsComponent},
 
 
   {
