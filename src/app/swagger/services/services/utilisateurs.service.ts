@@ -9,12 +9,9 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { AccountResponse } from '../models/account-response';
 import { AdresseDto } from '../models/adresse-dto';
 import { InsertUtilisateurDto } from '../models/insert-utilisateur-dto';
-import { NewPassword } from '../models/new-password';
 import { PasswordDto } from '../models/password-dto';
-import { ResetPassword } from '../models/reset-password';
 import { UtilisateurDto } from '../models/utilisateur-dto';
 
 @Injectable({
@@ -255,115 +252,6 @@ export class UtilisateursService extends BaseService {
 
     return this.addAdresseToUser$Response(params,context).pipe(
       map((r: StrictHttpResponse<string>) => r.body as string)
-    );
-  }
-
-  /**
-   * Path part for operation resetPassword
-   */
-  static readonly ResetPasswordPath = '/utilisateurs/resetPassword/{token}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `resetPassword()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  resetPassword$Response(params: {
-    token: string;
-    body: NewPassword
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<AccountResponse>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UtilisateursService.ResetPasswordPath, 'post');
-    if (params) {
-      rb.path('token', params.token, {});
-      rb.body(params.body, 'application/json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<AccountResponse>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `resetPassword$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  resetPassword(params: {
-    token: string;
-    body: NewPassword
-  },
-  context?: HttpContext
-
-): Observable<AccountResponse> {
-
-    return this.resetPassword$Response(params,context).pipe(
-      map((r: StrictHttpResponse<AccountResponse>) => r.body as AccountResponse)
-    );
-  }
-
-  /**
-   * Path part for operation resetPasswordEmail
-   */
-  static readonly ResetPasswordEmailPath = '/utilisateurs/checkEmail';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `resetPasswordEmail()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  resetPasswordEmail$Response(params: {
-    body: ResetPassword
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<AccountResponse>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UtilisateursService.ResetPasswordEmailPath, 'post');
-    if (params) {
-      rb.body(params.body, 'application/json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<AccountResponse>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `resetPasswordEmail$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  resetPasswordEmail(params: {
-    body: ResetPassword
-  },
-  context?: HttpContext
-
-): Observable<AccountResponse> {
-
-    return this.resetPasswordEmail$Response(params,context).pipe(
-      map((r: StrictHttpResponse<AccountResponse>) => r.body as AccountResponse)
     );
   }
 

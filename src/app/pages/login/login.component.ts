@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
                await this.router.navigate(['admin/users']);
           window.location.reload();
         } else {
-          await this.router.navigate(['user/profile']);
+          await this.router.navigate(['user/moncompte']);
           window.location.reload();
 
         }

@@ -6,6 +6,7 @@ import {UtilisateursService} from "../../swagger/services/services/utilisateurs.
 import {ToastrService} from "ngx-toastr";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TokenService} from "../../services/token-service/token.service";
+import {AuthentificationService} from "../../swagger/services/services/authentification.service";
 
 @Component({
   selector: 'app-reset-password',
@@ -27,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
     this.newPassword.tokenPassword = this.tokenUrl;
   }
 
-  constructor(private auth: UtilisateursService,
+  constructor(private auth: AuthentificationService,
               private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar,

@@ -22,6 +22,7 @@ import {SuccessPaimentComponent} from "./pages/success-paiment/success-paiment.c
 import {StatusResponseComponent} from "./pages/status-response/status-response.component";
 import {TermsConditionsComponent} from "./pages/terms-conditions/terms-conditions.component";
 import {FaqPageComponent} from "./pages/faq-page/faq-page.component";
+import {CgvComponent} from "./pages/cgv/cgv.component";
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'successPaiment', component: SuccessPaimentComponent},
   {path: 'termsConditions', component: TermsConditionsComponent},
   {path: 'faq', component: FaqPageComponent},
+  {path: 'cgv', component: CgvComponent},
 
 
   {

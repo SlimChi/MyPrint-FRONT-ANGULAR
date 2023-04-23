@@ -37,6 +37,7 @@ import {NgxBraintreeModule} from "ngx-braintree";
 import { StatusResponseComponent } from './pages/status-response/status-response.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
+import { CgvComponent } from './pages/cgv/cgv.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { FaqPageComponent } from './pages/faq-page/faq-page.component';
     StatusResponseComponent,
     TermsConditionsComponent,
     FaqPageComponent,
+    CgvComponent,
 
 
 

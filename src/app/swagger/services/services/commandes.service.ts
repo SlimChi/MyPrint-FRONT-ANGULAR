@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { InsertCommandeDto } from '../models/insert-commande-dto';
+import { InsertFullCommandeDto } from '../models/insert-full-commande-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -177,6 +178,118 @@ export class CommandesService extends BaseService {
 ): Observable<string> {
 
     return this.insert6$Response(params,context).pipe(
+      map((r: StrictHttpResponse<string>) => r.body as string)
+    );
+  }
+
+  /**
+   * Path part for operation insertFullCommandeFichier
+   */
+  static readonly InsertFullCommandeFichierPath = '/commandes/fullfichier';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `insertFullCommandeFichier()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  insertFullCommandeFichier$Response(params: {
+    body: {
+'commandeDto'?: InsertFullCommandeDto;
+'fichiers': Array<Blob>;
+}
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<string>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CommandesService.InsertFullCommandeFichierPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<string>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `insertFullCommandeFichier$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  insertFullCommandeFichier(params: {
+    body: {
+'commandeDto'?: InsertFullCommandeDto;
+'fichiers': Array<Blob>;
+}
+  },
+  context?: HttpContext
+
+): Observable<string> {
+
+    return this.insertFullCommandeFichier$Response(params,context).pipe(
+      map((r: StrictHttpResponse<string>) => r.body as string)
+    );
+  }
+
+  /**
+   * Path part for operation insertFullCommande
+   */
+  static readonly InsertFullCommandePath = '/commandes/full';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `insertFullCommande()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  insertFullCommande$Response(params: {
+    body: InsertFullCommandeDto
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<string>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CommandesService.InsertFullCommandePath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<string>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `insertFullCommande$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  insertFullCommande(params: {
+    body: InsertFullCommandeDto
+  },
+  context?: HttpContext
+
+): Observable<string> {
+
+    return this.insertFullCommande$Response(params,context).pipe(
       map((r: StrictHttpResponse<string>) => r.body as string)
     );
   }

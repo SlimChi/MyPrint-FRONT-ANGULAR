@@ -1,0 +1,17 @@
+/* Style pour les titres */
+h1 {
+    font-size: 30px;
+
+    margin: 20px 0;
+    color: #007bff;
+}
+h2 {
+    font-size: 20px;
+    margin: 15px 0;
+    color: #007bff;
+}
+/* Style pour les paragraphes */
+p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
