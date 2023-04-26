@@ -38,6 +38,7 @@ import { StatusResponseComponent } from './pages/status-response/status-response
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { CgvComponent } from './pages/cgv/cgv.component';
+import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentialite/politique-confidentialite.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { CgvComponent } from './pages/cgv/cgv.component';
     TermsConditionsComponent,
     FaqPageComponent,
     CgvComponent,
+    PolitiqueConfidentialiteComponent,
 
 
 

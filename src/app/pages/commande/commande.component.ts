@@ -71,7 +71,6 @@ export class CommandeComponent implements OnInit {
     }
 
 
-
     countPdfPages() {
         if (this.selectedFile) {
             pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/pdf.worker.js';
@@ -102,7 +101,7 @@ export class CommandeComponent implements OnInit {
                     size: fileSize,
                     date: fileDate,
                     data: this.fileData, // utiliser la valeur mise à jour de fileData
-                    nbrPages : this.numPages
+                    nbrPages: this.numPages
                 };
 
                 // Récupérer la liste des fichiers à partir du localstorage
@@ -117,12 +116,11 @@ export class CommandeComponent implements OnInit {
             }
         };
         reader.readAsDataURL(this.selectedFile as Blob);
-        this.ajouterAuPanier();
     }
 
 
-
     ajouterAuPanier(): void {
+        this.storeFile();
         const categoriesDataString = localStorage.getItem('categories');
         if (categoriesDataString) {
             const categoriesData = JSON.parse(categoriesDataString);
@@ -131,17 +129,25 @@ export class CommandeComponent implements OnInit {
             const lastCategoryLabel = lastCategory.libelle;
 
             try {
-                // Récupération des données du local storage
-                const panierData: string | null = localStorage.getItem('panier');
-
+                // Récupération des données du localStorage
+                const panierDataString: string | null = localStorage.getItem('panier');
                 let panier = [];
 
                 // Si des données existent, on les parse en tant qu'objet JSON
-                if (panierData !== null) {
-                    panier = JSON.parse(panierData);
+                if (panierDataString !== null) {
+                    panier = JSON.parse(panierDataString);
                 }
-                const fileData: string | null = localStorage.getItem('file');
-                // Ajout du libellé de la dernière catégorie au nouvel ordre du panier
+
+                // Récupération des données de la fileList du localStorage
+                const fileListDataString: string | null = localStorage.getItem('fileList');
+                let fileList = [];
+
+                // Si des données existent, on les parse en tant qu'objet JSON
+                if (fileListDataString !== null) {
+                    fileList = JSON.parse(fileListDataString);
+                }
+
+                // Vérifier que la valeur de "fileData" n'est pas null avant de l'utiliser
                 const newOrder = {
                     format: this.format,
                     couleur: this.couleur,
@@ -149,24 +155,23 @@ export class CommandeComponent implements OnInit {
                     tirage: this.tirage,
                     fileName: this.selectedFile?.name ?? '',
                     nbrPages: this.numPages,
-                    fileData: fileData !== null ? JSON.parse(fileData).data : null,
-                    lastCategory: lastCategoryLabel,// Ajout du libellé de la dernière catégorie
-                    prix: (0.10 * (this.numPages * this.tirage)).toFixed(2)// Ajout du prix calculé
-
+                    data: this.fileData !== null ? this.fileData : null,
+                    lastCategory: lastCategoryLabel,
+                    prix:(0.10 * (this.numPages * this.tirage)).toFixed(2)
                 };
-                panier.push(newOrder);
+                panier = panier.concat(newOrder);
 
-                // Stockage des données mises à jour dans le local storage
+                // Stockage des données mises à jour dans le localStorage
                 localStorage.setItem('panier', JSON.stringify(panier));
 
                 // Redirection vers la page du panier
                 this.router.navigate(['user/panier']);
             } catch (error) {
-
+                console.error(error);
             }
         }
-
     }
+
 
     onDragOver(event: DragEvent) {
         event.preventDefault();
@@ -223,7 +228,7 @@ export class CommandeComponent implements OnInit {
             this.selectedFile = null;
             this.fileName = '';
             this.numPages = 0;
-            this.tirage=1;
+            this.tirage = 1;
             this.snackBar.open('Fichier supprimé', 'Fermer', {
                 duration: 4000
             });

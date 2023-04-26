@@ -98,7 +98,10 @@ export class PaimentComponent implements OnInit {
     removePanier() {
         this.commandes = [];
         localStorage.removeItem('panier');
+        localStorage.removeItem('fileList');
     }
+
+
 
 
 }

@@ -90,7 +90,7 @@
             <p>Total : {{ getTotal() }} € </p>
 
             <div class="text-end">
-              <button class="btn btn-outline-success" [routerLink]="['/user/paiment']" (click)="uploadFiles(); loadCart()"
+              <button class="btn btn-outline-success" [routerLink]="['/user/paiment']" (click)="loadCart();uploadFiles(); sendCartToBackend()"
                       style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" [disabled]="+getTotal() === 0">Passer la commande</button>
 
 
@@ -100,8 +100,8 @@
       </div>
     </div>
   </div>
-  <h5 style="margin-left: 16%">Vos adresses </h5>
-  <hr style="width: 8%; margin-left: 16%">
+  <h5 style="margin-left: 20%">Vos adresses </h5>
+  <hr style="width: 8%; margin-left: 20%">
   <div class="row card2">
     <div class="col-md-3" *ngFor="let ad of adresse">
       <div class="card mb-3 shadow">

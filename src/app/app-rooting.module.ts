@@ -23,6 +23,7 @@ import {StatusResponseComponent} from "./pages/status-response/status-response.c
 import {TermsConditionsComponent} from "./pages/terms-conditions/terms-conditions.component";
 import {FaqPageComponent} from "./pages/faq-page/faq-page.component";
 import {CgvComponent} from "./pages/cgv/cgv.component";
+import {PolitiqueConfidentialiteComponent} from "./pages/politique-confidentialite/politique-confidentialite.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'termsConditions', component: TermsConditionsComponent},
   {path: 'faq', component: FaqPageComponent},
   {path: 'cgv', component: CgvComponent},
+  {path: 'politique', component: PolitiqueConfidentialiteComponent},
 
 
   {

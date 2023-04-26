@@ -2455,6 +2455,9 @@
           "rectoVerso": {
             "type": "boolean"
           },
+          "format": {
+            "type": "string"
+          },
           "couleur": {
             "type": "boolean"
           },
@@ -3292,20 +3295,20 @@
           "default": {
             "type": "boolean"
           },
+          "expired": {
+            "type": "boolean"
+          },
           "networkTokenized": {
             "type": "boolean"
+          },
+          "maskedNumber": {
+            "type": "string"
           },
           "venmoSdk": {
             "type": "boolean"
           },
           "expirationDate": {
             "type": "string"
-          },
-          "maskedNumber": {
-            "type": "string"
-          },
-          "expired": {
-            "type": "boolean"
           }
         }
       },
@@ -3596,6 +3599,12 @@
               "type": "string"
             }
           },
+          "graphQLId": {
+            "type": "string"
+          },
+          "defaultPaymentMethod": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
           "payPalAccounts": {
             "type": "array",
             "items": {
@@ -3607,12 +3616,6 @@
             "items": {
               "$ref": "#/components/schemas/PaymentMethod"
             }
-          },
-          "defaultPaymentMethod": {
-            "$ref": "#/components/schemas/PaymentMethod"
-          },
-          "graphQLId": {
-            "type": "string"
           }
         }
       },
@@ -4160,17 +4163,17 @@
           "default": {
             "type": "boolean"
           },
+          "expired": {
+            "type": "boolean"
+          },
+          "maskedNumber": {
+            "type": "string"
+          },
           "venmoSdk": {
             "type": "boolean"
           },
           "expirationDate": {
             "type": "string"
-          },
-          "maskedNumber": {
-            "type": "string"
-          },
-          "expired": {
-            "type": "boolean"
           }
         }
       },
@@ -4258,10 +4261,10 @@
           "issuingBank": {
             "type": "string"
           },
-          "expirationDate": {
+          "maskedNumber": {
             "type": "string"
           },
-          "maskedNumber": {
+          "expirationDate": {
             "type": "string"
           }
         }
@@ -4431,13 +4434,13 @@
           "default": {
             "type": "boolean"
           },
+          "token": {
+            "type": "string"
+          },
           "customerId": {
             "type": "string"
           },
           "imageUrl": {
-            "type": "string"
-          },
-          "token": {
             "type": "string"
           }
         }
@@ -4683,17 +4686,17 @@
           "default": {
             "type": "boolean"
           },
+          "expired": {
+            "type": "boolean"
+          },
+          "maskedNumber": {
+            "type": "string"
+          },
           "venmoSdk": {
             "type": "boolean"
           },
           "expirationDate": {
             "type": "string"
-          },
-          "maskedNumber": {
-            "type": "string"
-          },
-          "expired": {
-            "type": "boolean"
           }
         }
       },
@@ -4781,10 +4784,10 @@
           "issuingBank": {
             "type": "string"
           },
-          "expirationDate": {
+          "maskedNumber": {
             "type": "string"
           },
-          "maskedNumber": {
+          "expirationDate": {
             "type": "string"
           }
         }
@@ -5543,17 +5546,17 @@
           "retried": {
             "type": "boolean"
           },
+          "payPalHereDetails": {
+            "$ref": "#/components/schemas/PayPalHereDetails"
+          },
           "disbursed": {
             "type": "boolean"
-          },
-          "graphQLId": {
-            "type": "string"
           },
           "payPalDetails": {
             "$ref": "#/components/schemas/PayPalDetails"
           },
-          "payPalHereDetails": {
-            "$ref": "#/components/schemas/PayPalHereDetails"
+          "graphQLId": {
+            "type": "string"
           }
         }
       },
@@ -6389,13 +6392,13 @@
       "ValidationErrors": {
         "type": "object",
         "properties": {
-          "allDeepValidationErrors": {
+          "allValidationErrors": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValidationError"
             }
           },
-          "allValidationErrors": {
+          "allDeepValidationErrors": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValidationError"
@@ -6570,17 +6573,17 @@
           "default": {
             "type": "boolean"
           },
+          "expired": {
+            "type": "boolean"
+          },
+          "maskedNumber": {
+            "type": "string"
+          },
           "venmoSdk": {
             "type": "boolean"
           },
           "expirationDate": {
             "type": "string"
-          },
-          "maskedNumber": {
-            "type": "string"
-          },
-          "expired": {
-            "type": "boolean"
           }
         }
       },
@@ -6671,10 +6674,10 @@
           "issuingBank": {
             "type": "string"
           },
-          "expirationDate": {
+          "maskedNumber": {
             "type": "string"
           },
-          "maskedNumber": {
+          "expirationDate": {
             "type": "string"
           }
         }

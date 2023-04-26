@@ -8,7 +8,9 @@ import {UtilisateursService} from "../../swagger/services/services/utilisateurs.
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
-
+import {forkJoin} from "rxjs";
+import {InsertFullCommandeDto} from "../../swagger/services/models/insert-full-commande-dto";
+import {CommandesService} from "../../swagger/services/services/commandes.service";
 
 
 @Component({
@@ -19,28 +21,29 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class PanierComponent {
     total: number = 0; // variable to hold the total price of items in the cart
     users: UtilisateurDto[] = [];
+    userDto: unknown = {email: '', nom: '', prenom: ''};
     user: Array<UtilisateurDto> = [];
     adresse: Array<AdresseDto> = [];
+    adresses: AdresseDto = {};
     typesAdresse: Array<TypeAdresse> = []; // étape 1
     errorMessage: string | undefined;
     commandes: any[] = [];
     categories: any[] = [];
-    file: string ='';
+    file: string = '';
 
 
     constructor(private adresseService: AddressService,
                 private userService: UtilisateursService,
                 private helperService: HelperService,
+                private commandeService: CommandesService,
                 private snackBar: MatSnackBar,
                 private http: HttpClient,
-
-                                                    ) {
+    ) {
     }
 
     ngOnInit(): void {
         this.findById()
-        this.getAllTypeAdresse()
-        this.getUserAdresse()
+
         this.loadCart()
     }
 
@@ -56,7 +59,7 @@ export class PanierComponent {
         }
     }
 
-    getTotal(): string | undefined {
+    getTotal(): string {
         let total = 0;
         let panier = localStorage.getItem("panier");
         if (panier !== null) {
@@ -131,7 +134,7 @@ export class PanierComponent {
         }
     }
 
-    private findById() {
+    findById() {
         this.adresseService.findAll1(this.helperService.userId).subscribe({
             next: (adresses) => {
                 this.adresse = adresses.filter((adresse) => adresse.utilisateurId === this.helperService.userId);
@@ -181,6 +184,24 @@ export class PanierComponent {
         }
     }
 
+    private findUserById() {
+        forkJoin([
+            this.userService.getUtilisateurById({
+                "idUtilisateur": this.helperService.userId
+            }),
+            this.adresseService.findAll1() // étape 2
+        ]).subscribe({
+            next: ([userData, typesAdresseData]) => {
+                this.userDto = userData;
+                this.typesAdresse = typesAdresseData;
+            },
+            error: (err) => {
+                console.error(err);
+                // handle the error scenario here
+            }
+        });
+    }
+
     async back() {
         await window.history.back();
     }
@@ -192,23 +213,66 @@ export class PanierComponent {
         // append each file to the form data
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            const fileBlob = new Blob([file.data], { type: file.type });
+            const fileBlob = new Blob([file.data], {type: file.type});
             formData.append('file', fileBlob, file.name);
         }
 
         // send the form data to the server
         this.http.post('http://localhost:9090/fichiers', formData).subscribe(
-            (response) => {
+            (response: any) => {
                 console.log(response);
-                this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', { duration: 4000 });
+                this.snackBar.open('Fichiers téléchargés avec succès', 'Fermer', {duration: 4000});
             },
             (error) => {
                 console.log(error);
-                this.snackBar.open(`Erreur lors du téléchargement du fichier: ${error.error}`, 'Fermer', { duration: 4000 });
+                this.snackBar.open(`Erreur lors du téléchargement des fichiers: ${error.error}`, 'Fermer', {duration: 4000});
             }
         );
     }
 
+
+
+    sendCartToBackend() {
+        const donneesLocalStoragePanier: string | null = localStorage.getItem('panier');
+        const fileListString: string | null = localStorage.getItem('fileList'); // Récupérer la liste des fichiers
+        if (typeof donneesLocalStoragePanier === 'string' && typeof fileListString === 'string') {
+            const commandes = JSON.parse(donneesLocalStoragePanier);
+            const fileList = JSON.parse(fileListString); // Convertir la chaîne JSON en objet JavaScript
+
+            // Vérifier si l'ID du fichier a été trouvé
+
+                // Récupérer l'idAdresse à partir de la propriété adresse
+                const idAdresse = this.adresse[0].id;
+
+                const insertFullCommandeDto: InsertFullCommandeDto = {
+                    commandeDto: {
+                        idUtilisateur: this.helperService.userId,
+                        idAdresse: idAdresse,
+                        prix: parseFloat(this.getTotal()),
+
+                    },
+                    ligneCommandesDto: commandes.map(c => ({
+                        rectoVerso: c.rectoVerso,
+                        format: c.format,
+                        couleur: c.couleur,
+                        nombreExemplaire: c.tirage,
+                        nombreFeuille: c.nbrPages,
+                        prixLigneCommande: c.prix,
+
+                    })),
+                };
+
+                this.commandeService.insertFullCommande({body: insertFullCommandeDto}).subscribe(
+                    () => {
+                        this.commandes = [];
+                        this.snackBar.open('Commande envoyée avec succès', 'Fermer', {duration: 3000});
+                    },
+                    (error) => {
+                        this.errorMessage = error.message;
+                    }
+                );
+            }
+        }
 
 
 }
