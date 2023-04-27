@@ -206,7 +206,7 @@ export class PanierComponent {
         await window.history.back();
     }
 
-    uploadFiles(): Promise<number[]> {
+    uploadFiles(): Promise<number> {
         const files = JSON.parse(localStorage.getItem('fileList') || '[]');
         const formData = new FormData();
 
@@ -217,27 +217,22 @@ export class PanierComponent {
             formData.append('file', fileBlob, file.name);
         }
 
-        const fileIds: number[] = []; // empty array to store uploaded file IDs
-
         // send the form data to the server
-        const uploadPromises = files.map(() => {
-            return this.http.post<{idFichier: number}>('http://localhost:9090/fichiers', formData).toPromise()
-                .then((response: {idFichier: number}) => {
-                    console.log(response);
-                    this.snackBar.open('Fichiers téléchargés avec succès', 'Fermer', {duration: 4000});
-                    fileIds.push(response.idFichier); // add the ID of the uploaded file to the array
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.snackBar.open(`Erreur lors du téléchargement des fichiers: ${error.error}`, 'Fermer', {duration: 4000});
-                    throw error;
-                });
-        });
-
-        return Promise.all(uploadPromises).then(() => {
-            return fileIds; // return the array of file IDs
-        });
+        return this.http.post<{idFichier: number}>('http://localhost:9090/fichiers', formData).toPromise()
+            .then((response: {idFichier: number}) => {
+                console.log(response);
+                this.snackBar.open('Fichiers téléchargés avec succès', 'Fermer', {duration: 4000});
+                return response.idFichier; // update the fileId variable with the ID of the uploaded file
+            })
+            .catch((error) => {
+                console.log(error);
+                this.snackBar.open(`Erreur lors du téléchargement des fichiers: ${error.error}`, 'Fermer', {duration: 4000});
+                throw error;
+            });
     }
+
+
+
 
     async sendCartToBackend() {
         const donneesLocalStoragePanier: string | null = localStorage.getItem('panier');
@@ -250,11 +245,7 @@ export class PanierComponent {
             const idAdresse = this.adresse[0].id;
 
             // Upload files and get fileId
-            const fileIds: number[] = [];
-            for (let i = 0; i < fileList.length; i++) {
-                const fileId = await this.uploadFile(fileList[i]);
-                fileIds.push(fileId);
-            }
+            const fileId = await this.uploadFiles();
 
             const insertFullCommandeDto: InsertFullCommandeDto = {
                 commandeDto: {
@@ -262,14 +253,14 @@ export class PanierComponent {
                     idAdresse: idAdresse,
                     prix: parseFloat(this.getTotal()),
                 },
-                ligneCommandesDto: commandes.map((c, index) => ({
+                ligneCommandesDto: commandes.map(c => ({
                     rectoVerso: c.rectoVerso,
                     format: c.format,
                     couleur: c.couleur,
                     nombreExemplaire: c.tirage,
                     nombreFeuille: c.nbrPages,
                     prixLigneCommande: c.prix,
-                    idFichier: fileIds[index] // Associer l'ID du fichier téléchargé au fichier correspondant
+                    idFichier: fileId // Ajouter l'ID du fichier téléchargé
                 })),
             };
 
@@ -284,21 +275,6 @@ export class PanierComponent {
             );
         }
     }
-    async uploadFile(file: any): Promise<number> {
-        const formData = new FormData();
-        const fileBlob = new Blob([file.data], {type: file.type});
-        formData.append('file', fileBlob, file.name);
-        return this.http.post<{idFichier: number}>('http://localhost:9090/fichiers', formData).toPromise()
-            .then((response: {idFichier: number}) => {
-                console.log(response);
-                this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', {duration: 4000});
-                return response.idFichier; // update the fileId variable with the ID of the uploaded file
-            })
-            .catch((error) => {
-                console.log(error);
-                this.snackBar.open(`Erreur lors du téléchargement des fichiers: ${error.error}`, 'Fermer', {duration: 4000});
-                throw error;
-            });
-    }
+
 }
 
