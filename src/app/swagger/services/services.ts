@@ -12,3 +12,4 @@ export { MailControllerService } from './services/mail-controller.service';
 export { IntervenirsService } from './services/intervenirs.service';
 export { FichiersService } from './services/fichiers.service';
 export { AuthentificationService } from './services/authentification.service';
+export { PaymentControllerService } from './services/payment-controller.service';

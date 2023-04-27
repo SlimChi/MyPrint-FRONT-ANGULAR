@@ -18,6 +18,7 @@ import { MailControllerService } from './services/mail-controller.service';
 import { IntervenirsService } from './services/intervenirs.service';
 import { FichiersService } from './services/fichiers.service';
 import { AuthentificationService } from './services/authentification.service';
+import { PaymentControllerService } from './services/payment-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -41,6 +42,7 @@ import { AuthentificationService } from './services/authentification.service';
     IntervenirsService,
     FichiersService,
     AuthentificationService,
+    PaymentControllerService,
     ApiConfiguration
   ],
 })

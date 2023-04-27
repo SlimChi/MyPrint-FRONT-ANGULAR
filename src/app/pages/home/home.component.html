@@ -1,5 +1,9 @@
+<div class="step">
+  <img src="/assets/images/teampic.png" alt="" class="img-fluid">
+</div>
+
 <div class="container cards-container">
-  <div class="row">
+  <div class="row mt-4" style="margin-bottom: 10%">
     <div class="col-md-6">
       <div class="card custom-card">
         <div class="card-header text-center">
@@ -19,10 +23,9 @@
         </div>
         <div class="card-body p-0">
           <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
-          <img class="card-img-top" src="/assets/images/these.png" alt="Card image cap" (click)="insertCategorie(2, 'Thèse')">
+            <img class="card-img-top" src="/assets/images/these.png" alt="Card image cap" (click)="insertCategorie(2, 'Thèse')">
           </a>
         </div>
-
       </div>
     </div>
   </div>
@@ -34,7 +37,7 @@
         </div>
         <div class="card-body p-0">
           <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
-          <img class="card-img-top" src="/assets/images/catalogue.jpg" alt="Card image cap" (click)="insertCategorie(3, 'Catalogue')">
+            <img class="card-img-top" src="/assets/images/catalogue.jpg" alt="Card image cap" (click)="insertCategorie(3, 'Catalogue')">
           </a>
         </div>
       </div>
@@ -46,8 +49,68 @@
         </div>
         <div class="card-body p-0">
           <a [routerLink]="isLogout ? '/commande' : '/user/commande'">
-          <img class="card-img-top" src="/assets/images/flyers.png" alt="Card image cap" (click)="insertCategorie(4, 'Flyers')">
+            <img class="card-img-top" src="/assets/images/flyers.png" alt="Card image cap" (click)="insertCategorie(4, 'Flyers')">
           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="center even my-4" style="background-color: lightsteelblue; height: 400px">
+  <div class="text-center">
+    <div class="row justify-content-center">
+      <h2>Comment ça marche ?</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-2">
+          <div class="step mt-4">
+            <img src="/assets/images/1.png" alt="livraison" style="width: 67%; margin-bottom: 20px">
+            <p>Je télécharge mon document</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+          <div class="step mt-4">
+            <img src="/assets/images/2.png" alt="" style="width: 45%; margin-bottom: 20px">
+            <p>Je sélectionne mes options </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+          <div class="step mt-4">
+            <img src="/assets/images/3.png" alt="" style="width: 34%; margin-bottom: 20px">
+            <p>Je suis livré(e) où je veux</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="margin-left: 35%">
+  <img src="/assets/images/free-delivery.png" alt="" style="width: 15%; margin-bottom: 20px">
+  <img src="/assets/images/myprints.png" alt="" style="width: 30%; margin-bottom: 20px">
+</div>
+
+<div class="center even my-4" style="background-color: lightsteelblue; height: 400px">
+  <div class="text-center">
+    <div class="row justify-content-center">
+      <h2>Comment récupérer ma commande ?</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-2">
+          <div class="step mt-4">
+            <img src="/assets/images/d1.png" alt="livraison" style="width: 35%; margin-bottom: 20px">
+            <p>Dans un de nos centres partenaires</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+          <div class="step mt-4">
+            <img src="/assets/images/d2.png" alt="" style="width: 35%; margin-bottom: 20px">
+            <p>L'après-midi si je commande <br>avant midi (selon agglomération)</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2">
+          <div class="step mt-4">
+            <img src="/assets/images/d3.png" alt="" style="width: 35%; margin-bottom: 20px">
+            <p>En 48 heures dans toute  <br>la France métropolitaine</p>
+          </div>
         </div>
       </div>
     </div>

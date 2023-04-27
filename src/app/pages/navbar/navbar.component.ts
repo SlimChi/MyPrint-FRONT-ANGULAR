@@ -56,16 +56,11 @@ export class NavbarComponent implements OnInit, DoCheck{
     this.router.navigateByUrl('/login');
   }
 
-
   isLogout = false;
 
   ngDoCheck(): void {
     const url = this.router.url;
     this.isLogout = !(url === '/login' || url === '/register' || url === '/home' || url === '/commande' || url === '/forgot-password');
-  }
-
-  switchLanguage(lang: string) {
-    this.currentLang = lang; // update the current language
   }
 
   isAuthenticated(): boolean {

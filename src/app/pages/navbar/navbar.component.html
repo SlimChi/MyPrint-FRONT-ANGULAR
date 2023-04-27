@@ -21,7 +21,7 @@
         <!-- Navbar brand -->
         <a class="navbar-brand mt-2 mt-lg-0" [routerLink]="!isLogout ? 'home' : 'user/home'">
           <img
-            src="assets/images/Myprint1.png"
+            src="assets/images/myprints.png"
             height="100"
             alt="Logo"
             loading="lazy"
@@ -34,14 +34,16 @@
       </div>
 
       <!-- Custom flag dropdown -->
-      <div class="dropdown">
-<!--        <div>-->
+      <div>
+        <div>
+          <p class="dropdown-item mt-3 m-lg-3 "[routerLink]="'faq'" style="color: whitesmoke; cursor: pointer">F.A.Q</p>
 
 <!--          <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="France" (click)="switchLanguage('fr')">-->
 <!--          <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="United Kingdom" (click)="switchLanguage('en')">-->
 
 <!--          <span class="flag-icon flag-icon-us"></span>-->
-<!--        </div>-->
+        </div>
+
       </div>
 
       <!-- Right elements -->

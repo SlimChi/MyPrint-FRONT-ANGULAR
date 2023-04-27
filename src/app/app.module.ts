@@ -32,6 +32,13 @@ import { MoncompteComponent } from './pages/moncompte/moncompte.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import {ToastrModule} from "ngx-toastr";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { SuccessPaimentComponent } from './pages/success-paiment/success-paiment.component';
+import {NgxBraintreeModule} from "ngx-braintree";
+import { StatusResponseComponent } from './pages/status-response/status-response.component';
+import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
+import { FaqPageComponent } from './pages/faq-page/faq-page.component';
+import { CgvComponent } from './pages/cgv/cgv.component';
+import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentialite/politique-confidentialite.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +61,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     PaimentComponent,
     MoncompteComponent,
     FooterComponent,
+    SuccessPaimentComponent,
+    StatusResponseComponent,
+    TermsConditionsComponent,
+    FaqPageComponent,
+    CgvComponent,
+    PolitiqueConfidentialiteComponent,
 
 
 
@@ -73,8 +86,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
         ReactiveFormsModule,
         ToastrModule.forRoot(),
         MatSnackBarModule,
-
-        // StripeModule.forRoot('your_stripe_publishable_key')
+        NgxBraintreeModule
     ],
   providers: [
     {
