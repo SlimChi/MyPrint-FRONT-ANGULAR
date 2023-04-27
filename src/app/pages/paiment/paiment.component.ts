@@ -93,15 +93,11 @@ export class PaimentComponent implements OnInit {
         );
     }
 
-
-// Supprime le panier
+    // Supprime le panier
     removePanier() {
         this.commandes = [];
         localStorage.removeItem('panier');
         localStorage.removeItem('fileList');
     }
-
-
-
 
 }
