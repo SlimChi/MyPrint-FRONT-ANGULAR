@@ -206,34 +206,6 @@ export class PanierComponent {
         await window.history.back();
     }
 
-    uploadFiles(): Promise<number> {
-        const files = JSON.parse(localStorage.getItem('fileList') || '[]');
-        const formData = new FormData();
-
-        // append each file to the form data
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const fileBlob = new Blob([file.data], {type: file.type});
-            formData.append('file', fileBlob, file.name);
-        }
-
-        // send the form data to the server
-        return this.http.post<{idFichier: number}>('http://localhost:9090/fichiers', formData).toPromise()
-            .then((response: {idFichier: number}) => {
-                console.log(response);
-                this.snackBar.open('Fichiers téléchargés avec succès', 'Fermer', {duration: 4000});
-                return response.idFichier; // update the fileId variable with the ID of the uploaded file
-            })
-            .catch((error) => {
-                console.log(error);
-                this.snackBar.open(`Erreur lors du téléchargement des fichiers: ${error.error}`, 'Fermer', {duration: 4000});
-                throw error;
-            });
-    }
-
-
-
-
     async sendCartToBackend() {
         const donneesLocalStoragePanier: string | null = localStorage.getItem('panier');
         const fileListString: string | null = localStorage.getItem('fileList'); // Récupérer la liste des fichiers
@@ -245,7 +217,11 @@ export class PanierComponent {
             const idAdresse = this.adresse[0].id;
 
             // Upload files and get fileId
-            const fileId = await this.uploadFiles();
+            const fileIds: number[] = [];
+            for (let i = 0; i < fileList.length; i++) {
+                const fileId = await this.uploadFile(fileList[i]);
+                fileIds.push(fileId);
+            }
 
             const insertFullCommandeDto: InsertFullCommandeDto = {
                 commandeDto: {
@@ -253,14 +229,14 @@ export class PanierComponent {
                     idAdresse: idAdresse,
                     prix: parseFloat(this.getTotal()),
                 },
-                ligneCommandesDto: commandes.map(c => ({
+                ligneCommandesDto: commandes.map((c, index) => ({
                     rectoVerso: c.rectoVerso,
                     format: c.format,
                     couleur: c.couleur,
                     nombreExemplaire: c.tirage,
                     nombreFeuille: c.nbrPages,
                     prixLigneCommande: c.prix,
-                    idFichier: fileId // Ajouter l'ID du fichier téléchargé
+                    idFichier: fileIds[index] // Associer l'ID du fichier téléchargé au fichier correspondant
                 })),
             };
 
@@ -272,9 +248,28 @@ export class PanierComponent {
                 (error) => {
                     this.errorMessage = error.message;
                 }
+
             );
+
         }
     }
+    async uploadFile(file: any): Promise<number> {
+        const formData = new FormData();
+        const fileBlob = new Blob([file.data], {type: file.type});
+        formData.append('file', fileBlob, file.name);
+        return this.http.post<{idFichier: number}>('http://localhost:9090/fichiers', formData).toPromise()
+            .then((response: {idFichier: number}) => {
+                console.log(response);
+                this.snackBar.open('Fichier téléchargé avec succès', 'Fermer', {duration: 4000});
+                return response.idFichier; // update the fileId variable with the ID of the uploaded file
+            })
+            .catch((error) => {
+                console.log(error);
+                this.snackBar.open(`Erreur lors du téléchargement des fichiers: ${error.error}`, 'Fermer', {duration: 4000});
+                throw error;
+            });
+    }
+
 
 }
 
