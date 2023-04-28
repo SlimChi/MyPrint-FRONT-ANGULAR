@@ -40,16 +40,16 @@
                             Date: {{ commande.date }}<br />
                             <div class="dropdown-container">
                                 Statut:
-                                <select class="custom-dropdown" [(ngModel)]="commande.statusDto.libelle">
-                                    <option value="Commande confirmé">Commande confirmée</option>
-                                    <option value="En cours d'impression">En cours d'impression</option>
-                                    <option value="Terminé">Terminé</option>
-                                    <option value="Envoyer">Envoyé</option>
-                                    <option value="Livrer">Livré</option>
+                                <select class="custom-dropdown status-select" [(ngModel)]="commande.statusDto.idStatus">
+                                    <option *ngFor="let status of statuses" [value]="status.idStatus">{{ status.libelle }}</option>
                                 </select>
+                                <button class="update-button" (click)="updateStatus(commande)">Update</button>
+
                             </div>
 
-                            Prix: {{ commande.prixCommande }}<br />
+
+
+                            Prix: {{ commande.prixCommande }} €<br />
 
                         </li>
                     </ul>

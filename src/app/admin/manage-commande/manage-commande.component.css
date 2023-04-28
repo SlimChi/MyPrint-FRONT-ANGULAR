@@ -30,3 +30,11 @@
 .custom-dropdown option:hover {
     background-color: #eee;
 }
+.update-button {
+    background-color: #28a745; /* couleur de fond */
+    color: #fff; /* couleur du texte */
+    border: none; /* suppression de la bordure */
+    border-radius: 4px; /* arrondi des coins */
+    padding: 8px 16px; /* espace à l'intérieur du bouton */
+    margin-left: 16px; /* marge à gauche */
+}

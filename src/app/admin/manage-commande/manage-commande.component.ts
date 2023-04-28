@@ -4,6 +4,8 @@ import { UtilisateursService } from "../../swagger/services/services/utilisateur
 import { HelperService } from "../../services/helper/helper.service";
 import { UtilisateurDto } from "../../swagger/services/models/utilisateur-dto";
 import { LigneCommandesService } from "../../swagger/services/services/ligne-commandes.service";
+import {StatusesService} from "../../swagger/services/services/statuses.service";
+import {StatusDto} from "../../swagger/services/models/status-dto";
 
 @Component({
   selector: 'app-manage-commande',
@@ -15,20 +17,21 @@ export class ManageCommandeComponent implements OnInit {
   selectedUser: UtilisateurDto | null = null;
   ligneCommandes: any[] = [];
   commandes: any[] = [];
-  commande ;
   afficherCommande=false;
-  statusClass: string = 'active';
-
+  status: string[];
+  statuses: StatusDto[];
 
   constructor(
       private userService: UtilisateursService,
       private commandeService: CommandesService,
       private ligneCommandeService: LigneCommandesService,
-      private helperService: HelperService
+      private helperService: HelperService,
+      private statusService: StatusesService,
   ) {}
 
   ngOnInit(): void {
     this.findAllusers();
+    this.getStatuses();
   }
 
   private findAllusers() {
@@ -65,5 +68,38 @@ export class ManageCommandeComponent implements OnInit {
     this.findCommandeById();
   }
 
-  
+
+  getStatuses(): void {
+    this.statusService.getStatuses().subscribe(
+        (response: any) => {
+          if (Array.isArray(response)) {
+            // Vérifie si la réponse est un tableau
+            this.statuses = response as StatusDto[];
+            console.log(this.statuses);
+          } else {
+            console.error("Response is not an array");
+          }
+        },
+        (error: any) => {
+          console.log(error);
+        }
+    );
+  }
+
+  updateStatus(commande: any): void {
+    this.commandeService.updateStatus2({
+      numeroCommande: commande.numeroCommande,
+      newIdStatus: commande.statusDto.idStatus,
+    }).subscribe(
+        (response: any) => {
+          console.log(response);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+    );
+  }
+
+
+
 }
