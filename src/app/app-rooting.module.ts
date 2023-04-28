@@ -24,6 +24,7 @@ import {TermsConditionsComponent} from "./pages/terms-conditions/terms-condition
 import {FaqPageComponent} from "./pages/faq-page/faq-page.component";
 import {CgvComponent} from "./pages/cgv/cgv.component";
 import {PolitiqueConfidentialiteComponent} from "./pages/politique-confidentialite/politique-confidentialite.component";
+import {ManageCommandeComponent} from "./admin/manage-commande/manage-commande.component";
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
       {path: 'adminDashboard', component: AdminDashboardComponent},
       {path: 'users', component: ManageUsersComponent},
       {path: 'profile', component: ProfileComponent},
+      {path: 'managecommande', component: ManageCommandeComponent},
       {
         path: '', redirectTo: 'dashboard',
         pathMatch: 'full'

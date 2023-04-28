@@ -39,6 +39,7 @@ import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditi
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { CgvComponent } from './pages/cgv/cgv.component';
 import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentialite/politique-confidentialite.component';
+import { ManageCommandeComponent } from './admin/manage-commande/manage-commande.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentia
     FaqPageComponent,
     CgvComponent,
     PolitiqueConfidentialiteComponent,
+    ManageCommandeComponent,
 
 
 

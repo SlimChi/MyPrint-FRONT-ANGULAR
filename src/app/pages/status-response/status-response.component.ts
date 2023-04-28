@@ -6,6 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./status-response.component.css']
 })
 export class StatusResponseComponent implements OnInit{
+
   ngOnInit(): void {
   }
 

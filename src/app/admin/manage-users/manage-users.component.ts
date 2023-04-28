@@ -6,6 +6,7 @@ import {AddressService} from "../../swagger/services/services/address.service";
 import {AdresseDto} from "../../swagger/services/models/adresse-dto";
 import {TypeAdresse} from "../../swagger/services/models/type-adresse";
 import {forkJoin, Observable} from "rxjs";
+import {CommandesService} from "../../swagger/services/services/commandes.service";
 
 @Component({
   selector: 'app-manage-users',
@@ -15,6 +16,7 @@ import {forkJoin, Observable} from "rxjs";
 export class ManageUsersComponent implements OnInit {
   users: Array<UtilisateurDto> = [];
   selectedUser: UtilisateurDto | null = null;
+  commande: string; // variable pour stocker les commandes
 
   adresse: Array<AdresseDto> = [];
   showDetail = false;
@@ -25,6 +27,7 @@ export class ManageUsersComponent implements OnInit {
     private userService: UtilisateursService,
     private helpService: HelperService,
     private adresseService: AddressService,
+    private commandeService: CommandesService,
     private helperService: HelperService
   ) {}
 
@@ -69,7 +72,6 @@ export class ManageUsersComponent implements OnInit {
       }
     });
   }
-
 
   private getAllTypeAdresse(): Observable<any> {
     return new Observable((observer) => {
