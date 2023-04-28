@@ -40,6 +40,7 @@ import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { CgvComponent } from './pages/cgv/cgv.component';
 import { PolitiqueConfidentialiteComponent } from './pages/politique-confidentialite/politique-confidentialite.component';
 import { ManageCommandeComponent } from './admin/manage-commande/manage-commande.component';
+import { HistoriqueCommandeComponent } from './pages/historique-commande/historique-commande.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ManageCommandeComponent } from './admin/manage-commande/manage-commande
     CgvComponent,
     PolitiqueConfidentialiteComponent,
     ManageCommandeComponent,
+    HistoriqueCommandeComponent,
 
 
 

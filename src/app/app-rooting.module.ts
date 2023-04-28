@@ -25,6 +25,7 @@ import {FaqPageComponent} from "./pages/faq-page/faq-page.component";
 import {CgvComponent} from "./pages/cgv/cgv.component";
 import {PolitiqueConfidentialiteComponent} from "./pages/politique-confidentialite/politique-confidentialite.component";
 import {ManageCommandeComponent} from "./admin/manage-commande/manage-commande.component";
+import {HistoriqueCommandeComponent} from "./pages/historique-commande/historique-commande.component";
 
 
 const routes: Routes = [
@@ -71,6 +72,7 @@ const routes: Routes = [
       {path: 'add-adresse', component: AddAdresseComponent},
       {path: 'home', component: HomeComponent},
       {path: 'commande', component: CommandeComponent},
+      {path: 'historiquecommande', component: HistoriqueCommandeComponent},
       {path: 'paiment', component: PaimentComponent},
       {path: 'moncompte', component: MoncompteComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
