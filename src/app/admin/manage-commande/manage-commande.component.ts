@@ -20,6 +20,7 @@ export class ManageCommandeComponent implements OnInit {
   afficherCommande=false;
   status: string[];
   statuses: StatusDto[];
+  selectedStatus: StatusDto;
 
   constructor(
       private userService: UtilisateursService,
@@ -32,6 +33,7 @@ export class ManageCommandeComponent implements OnInit {
   ngOnInit(): void {
     this.findAllusers();
     this.getStatuses();
+
   }
 
   private findAllusers() {
@@ -93,6 +95,7 @@ export class ManageCommandeComponent implements OnInit {
     }).subscribe(
         (response: any) => {
           console.log(response);
+          this.selectedStatus = this.statuses.find(status => status.idStatus === commande.statusDto.idStatus);
         },
         (error: any) => {
           console.log(error);

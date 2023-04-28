@@ -7,6 +7,8 @@ import {AdresseDto} from "../../swagger/services/models/adresse-dto";
 import {TypeAdresse} from "../../swagger/services/models/type-adresse";
 import {forkJoin, Observable} from "rxjs";
 import {CommandesService} from "../../swagger/services/services/commandes.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {TokenService} from "../../services/token-service/token.service";
 
 @Component({
   selector: 'app-manage-users',
@@ -21,14 +23,19 @@ export class ManageUsersComponent implements OnInit {
   adresse: Array<AdresseDto> = [];
   showDetail = false;
   typesAdresse: Array<TypeAdresse> = []; // étape 1
-
+  userRole: boolean = false;
+  adminRole: boolean = false;
+  loggedInUserName: string | undefined = undefined;
+ loggedUserRole: string | undefined = undefined;
+  filteredUsers: any[];
 
   constructor(
     private userService: UtilisateursService,
     private helpService: HelperService,
     private adresseService: AddressService,
     private commandeService: CommandesService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private tokenService: TokenService,
   ) {}
 
   ngOnInit(): void {
@@ -37,9 +44,11 @@ export class ManageUsersComponent implements OnInit {
       console.log(this.typesAdresse);
     });
     this.findById();
+    this.getRoles();
   }
 
   private findAllusers() {
+
     this.userService.getUtilisateurs().subscribe({
       next: (value) => {
         this.users = value;
@@ -88,5 +97,29 @@ export class ManageUsersComponent implements OnInit {
       });
     });
   }
+
+  getRoles() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = new JwtHelperService().decodeToken(token);
+      const authorities = decodedToken.authorities;
+      this.userRole = authorities.includes('ROLE_USER');
+      this.adminRole = authorities.includes('ROLE_ADMIN');
+      this.loggedInUserName = this.getLoggedInUserName(authorities);
+
+    }
+    this.tokenService.getToken();
+  }
+
+  private getLoggedInUserName(authorities: any[]): string {
+    if (authorities.includes('ROLE_USER')) {
+      return 'Utilisateur';
+    } else if (authorities.includes('ROLE_ADMIN')) {
+      return 'Administrateur';
+    } else {
+      return '';
+    }
+  }
+
 
 }
