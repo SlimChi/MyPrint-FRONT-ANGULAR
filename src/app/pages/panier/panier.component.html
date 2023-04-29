@@ -1,7 +1,7 @@
-<div class="container d-flex justify-content-center" *ngIf="commandes.length === 0"  style="margin-bottom: 25%; margin-top: 20%">
+<div class="container text-center justify-content-center" *ngIf="commandes.length === 0"  style="margin-bottom: 25%; margin-top: 20%">
   <div class="alert alert-warning" role="alert">
     Votre panier est vide. Veuillez ajouter des commandes !! <br>
-    <button class="btn btn-sm btn-success" style="margin-left: 20%; margin-top: 5%" [routerLink]="['/user/home']" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle commande">
+    <button class="btn btn-sm btn-success" style="margin-top: 5%" [routerLink]="['/user/home']" data-toggle="tooltip" data-placement="top" title="Ajouter une nouvelle commande">
       <i class="fas fa-plus"></i>Ajouter une nouvelle commande
     </button>
   </div>
