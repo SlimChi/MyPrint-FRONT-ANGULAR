@@ -7,6 +7,7 @@ import {HelperService} from "../../services/helper/helper.service";
 import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
 import {MailControllerService} from "../../swagger/services/services/mail-controller.service";
 import {EmailMessage} from "../../swagger/services/models/email-message";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-status-response',
@@ -51,24 +52,34 @@ export class StatusResponseComponent implements OnInit{
           this.commandes = commandes as unknown as any[];
           this.calculateAllCompletedSteps(); // ajoute une propriété completedSteps pour chaque commande
           this.sortCommandesByCompletedSteps();
+          const emailSent = localStorage.getItem('emailSent'); // vérifiez si l'email a déjà été envoyé
 
           // Recherchez toutes les commandes dont le statut est "Envoyer" et envoyez un email à l'utilisateur correspondant
-          this.commandes.filter(commande => commande.statusDto.libelle === 'Envoyer').forEach(async (commande) => {
-            const emailMessage: EmailMessage = {
-              to: this.user.email,
-              email: `Commande envoyée`,
-              subject: `Votre commande a été envoyée.`
-            };
-            await this.mailService.emailSending({ body: emailMessage }).toPromise();
-          });
+          if (!emailSent) { // vérifiez si l'email n'a pas encore été envoyé
+            // Recherchez toutes les commandes dont le statut est "Envoyer" et envoyez un email à l'utilisateur correspondant
+            const commandesEnvoyees = this.commandes.filter(commande => commande.statusDto.libelle === 'Envoyer');
+            if (commandesEnvoyees.length > 0) { // vérifiez s'il y a au moins une commande correspondante
+              commandesEnvoyees.forEach(async (commande) => {
+                const emailMessage: EmailMessage = {
+                  to: this.user.email,
+                  email: `Commande envoyée`,
+                  subject: `Votre commande a été envoyée.`
+                };
+                await firstValueFrom(this.mailService.emailSending({ body: emailMessage }));
+              });
+              localStorage.setItem('emailSent', 'true'); // stockez l'information dans le stockage local du navigateur
+            }
+          }
         },
         error: (err) => {
           console.error(err);
         }
       });
     }
-
   }
+
+
+
 
   async back() {
     window.history.back();
