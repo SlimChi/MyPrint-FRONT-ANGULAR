@@ -48,7 +48,7 @@
 
       <!-- Right elements -->
       <ul class="navbar-nav d-flex flex-row ms-auto me-3">
-        <p class="dropdown-item mb-0 mt-2 " style="color: whitesmoke" *ngIf="loggedInUserName && isLogout">Bienvenue {{ loggedInUserName }}</p>
+        <p class="dropdown-item mb-0 mt-2 " style="color: whitesmoke" *ngIf="loggedInUserName && isLogout">Bienvenue : <span>{{getUsername()}}</span></p>
 
         <!-- Shopping cart icon -->
         <li class="nav-item me-3">

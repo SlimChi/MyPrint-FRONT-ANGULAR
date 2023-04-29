@@ -49,6 +49,9 @@ export class NavbarComponent implements OnInit, DoCheck{
     }
   }
 
+  getUsername(){
+    return this.helperService.userFullname;
+  }
 
   logout(): void {
     this.tokenService.clearToken();
