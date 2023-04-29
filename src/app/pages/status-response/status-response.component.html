@@ -1,62 +1,66 @@
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-<div *ngFor="let commande of commandes" class="container padding-bottom-3x mb-1">
-    <div class="card mb-3">
-        <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Commande N° - </span><span class="text-medium"> {{commande.numeroCommande}}</span></div>
-        <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Envyer via :</span> UPS Ground</div>
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> Impression</div>
-            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Date de livraison:</span> SEP 09, 2023</div>
+<div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <div class="container justify-content-center text-center" *ngIf="commandes.length === 0"  style="margin-bottom: 25%; margin-top: 20%">
+        <div class="alert alert-warning" role="alert">
+            Il n'y a pas de commande pour le moment !! <br>
         </div>
-        <div class="card-body">
-            <div  class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                <div class="step" [class.completed]="commande.statusDto.libelle === 'Commande confirmé' || commande.statusDto.libelle === 'En cours dimpression' || commande.statusDto.libelle === 'Terminer'|| (commande.statusDto.libelle === 'Envoyer' && commande.statusDto.libelle !== 'Livrer') || commande.statusDto.libelle === 'Livrer'">
-                    <div class="step-icon-wrap">
-                        <div class="step-icon"><i class="fas fa-print"></i></div>
-                    </div>
-                    <h4 class="step-title">Commande confirmée</h4>
-                </div>
-                <div class="step" [class.completed]="commande.statusDto.libelle === 'En cours dimpression' || commande.statusDto.libelle === 'Terminer'|| (commande.statusDto.libelle === 'Envoyer' && commande.statusDto.libelle !== 'Livrer') || commande.statusDto.libelle === 'Livrer'">
-                    <div class="step-icon-wrap">
-                        <div class="step-icon"><i class="fas fa-print"></i></div>
-                    </div>
-                    <h4 class="step-title">En cours d'impression</h4>
-                </div>
-                <div class="step" [class.completed]="commande.statusDto.libelle === 'Terminer'|| (commande.statusDto.libelle === 'Envoyer' && commande.statusDto.libelle !== 'Livrer') || commande.statusDto.libelle === 'Livrer'">
-                    <div class="step-icon-wrap">
-                        <div class="step-icon"><i class="fas fa-flag-checkered"></i></div>
-                    </div>
-                    <h4 class="step-title">Terminé</h4>
-                </div>
-                <div class="step" [class.completed]="commande.statusDto.libelle === 'Livrer' || commande.statusDto.libelle === 'Livrer' || commande.statusDto.libelle === 'Envoyer'" [class.completedAll]="commande.statusDto.libelle === 'Livrer'">
-                    <div class="step-icon-wrap">
-                        <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
-                    </div>
-                    <h4 class="step-title">Envoyé</h4>
-                </div>
-                <div class="step" [class.completed]="commande.statusDto.libelle === 'Livrer'" [class.completedAll]="commande.statusDto.libelle === 'Livrer'">
-                    <div class="step-icon-wrap">
-                        <div class="step-icon"><i class="pe-7s-home"></i></div>
-                    </div>
-                    <h4 class="step-title">Livré</h4>
-                </div>
-            </div>
-
-            </div>
-        </div>
-
-        <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
-            <div class="custom-control custom-checkbox mr-3">
-                <input class="custom-control-input" type="checkbox" id="notify_me" checked="">
-                <label class="custom-control-label" for="notify_me">Envoyer un mail quand la commande est envoyée</label>
-            </div>
-            <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" [routerLink]="['/user/historiquecommande']" data-toggle="modal" data-target="#orderDetails">Détails de ma commande</a></div>
-        </div>
-
-    <button class="btn btn-sm btn-outline-secondary  top-2 start-0 mt-3 ms-3" (click)="back()" style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
-        Page précédente
-    </button>
     </div>
+    <div *ngFor="let commande of commandes" class="container padding-bottom-3x mb-1">
+        <div class="card mb-3">
+            <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Commande N° - </span><span class="text-medium"> {{commande.numeroCommande}}</span></div>
+            <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+                <div class="w-100 text-center py-1 px-2"><span class="text-medium">Envyer via :</span> UPS Ground</div>
+                <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> Impression</div>
+                <div class="w-100 text-center py-1 px-2"><span class="text-medium">Date de livraison:</span> SEP 09, 2023</div>
+            </div>
+            <div class="card-body">
+                <div  class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                    <div class="step" [class.completed]="commande.statusDto.libelle === 'Commande confirmé' || commande.statusDto.libelle === 'En cours dimpression' || commande.statusDto.libelle === 'Terminer'|| (commande.statusDto.libelle === 'Envoyer' && commande.statusDto.libelle !== 'Livrer') || commande.statusDto.libelle === 'Livrer'">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="fas fa-print"></i></div>
+                        </div>
+                        <h4 class="step-title">Commande confirmée</h4>
+                    </div>
+                    <div class="step" [class.completed]="commande.statusDto.libelle === 'En cours dimpression' || commande.statusDto.libelle === 'Terminer'|| (commande.statusDto.libelle === 'Envoyer' && commande.statusDto.libelle !== 'Livrer') || commande.statusDto.libelle === 'Livrer'">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="fas fa-print"></i></div>
+                        </div>
+                        <h4 class="step-title">En cours d'impression</h4>
+                    </div>
+                    <div class="step" [class.completed]="commande.statusDto.libelle === 'Terminer'|| (commande.statusDto.libelle === 'Envoyer' && commande.statusDto.libelle !== 'Livrer') || commande.statusDto.libelle === 'Livrer'">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="fas fa-flag-checkered"></i></div>
+                        </div>
+                        <h4 class="step-title">Terminé</h4>
+                    </div>
+                    <div class="step" [class.completed]="commande.statusDto.libelle === 'Livrer' || commande.statusDto.libelle === 'Livrer' || commande.statusDto.libelle === 'Envoyer'" [class.completedAll]="commande.statusDto.libelle === 'Livrer'">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+                        </div>
+                        <h4 class="step-title">Envoyé</h4>
+                    </div>
+                    <div class="step" [class.completed]="commande.statusDto.libelle === 'Livrer'" [class.completedAll]="commande.statusDto.libelle === 'Livrer'">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-home"></i></div>
+                        </div>
+                        <h4 class="step-title">Livré</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="commandes.length > 0" class="container padding-bottom-3x mb-1">
+        <div class="custom-control">
+                   <a class="btn btn-outline-primary btn-rounded btn-sm btn-right" [routerLink]="['/user/historiquecommande']" data-toggle="modal" data-target="#orderDetails">Détails de ma commande</a>
+        </div>
+
+    </div>
+
+</div>
+
 
 
 

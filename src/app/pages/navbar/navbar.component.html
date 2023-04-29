@@ -73,7 +73,8 @@
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-left text-left" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" [routerLink]="'user/moncompte'" *ngIf="userRole && isAuthenticated()">Mon Compte</a>
                 <a class="dropdown-item" [routerLink]="'admin/users'" *ngIf="adminRole && isAuthenticated()">Liste des utilisateurs</a>
-                <a class="dropdown-item" [routerLink]="'admin/managecommande'" *ngIf="adminRole && isAuthenticated()">Liste des commanes</a>
+                <a class="dropdown-item" [routerLink]="'admin/managecommande'" *ngIf="adminRole && isAuthenticated()">Liste des commandes</a>
+                <a class="dropdown-item" [routerLink]="'user/historiquecommande'" *ngIf="userRole && isAuthenticated()">Mes commandes</a>
                 <a class="dropdown-item" [routerLink]="'user/profile'"*ngIf="userRole && isAuthenticated()">Mes informations</a>
                 <a class="dropdown-item" [routerLink]="'admin/profile'"*ngIf="adminRole && isAuthenticated()">Mes informations</a>
                 <a class="dropdown-item" [routerLink]="'user/panier'"*ngIf="userRole && isAuthenticated()">Mon panier</a>

@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 5%; justify-content: center">
+<div class="container" style="margin-top: 5%;">
     <div class="card mb-3 cardadresse">
         <div class="card-body">
             <h1>Mes commandes</h1>
@@ -13,7 +13,6 @@
             Commande de {{user?.nom}} {{user?.prenom}}
         </div>
         <div class="card-body">
-
             <ul style="list-style: none; padding: 0;">
                 <li *ngFor="let commande of commandes" style="margin-bottom: 10px;">
                     <div style="display: flex; align-items: center;">
@@ -65,7 +64,9 @@
                     </div>
                     <hr>
                 </li>
-
+                <li *ngIf="!commandes || commandes.length === 0">
+                    <div class="alert alert-info">Vous n'avez aucune commande.</div>
+                </li>
             </ul>
             <button [routerLink]="['/user/status']" class="btn btn-primary j" style="font-size: 1.2rem; padding: 10px 20px;">Suivre mes commandes</button>
         </div>

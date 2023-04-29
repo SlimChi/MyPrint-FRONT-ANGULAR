@@ -62,7 +62,7 @@ export class StatusResponseComponent implements OnInit{
               commandesEnvoyees.forEach(async (commande) => {
                 const emailMessage: EmailMessage = {
                   to: this.user.email,
-                  email: `Commande envoyée`,
+                  email: `Commande envoyée à votre adresse`,
                   subject: `Votre commande a été envoyée.`
                 };
                 await firstValueFrom(this.mailService.emailSending({ body: emailMessage }));
@@ -77,9 +77,6 @@ export class StatusResponseComponent implements OnInit{
       });
     }
   }
-
-
-
 
   async back() {
     window.history.back();
