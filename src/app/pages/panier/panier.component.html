@@ -88,13 +88,13 @@
           <div class="card-body">
             <h5 class="card-title">Résumé de la commande</h5>
             <p>Total : {{ getTotal() }} € </p>
-
             <div class="text-end">
               <button class="btn btn-outline-success" [routerLink]="['/user/paiment']" (click)="loadCart(); sendCartToBackend()"
-                      style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" [disabled]="+getTotal() === 0 || adresse.length === 0">Passer la commande</button>
+                      style="box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" [disabled]="+getTotal() === 0 || adresse.length === 0"
+                      data-toggle="tooltip" data-placement="top" title="Veuillez ajouter une adresse pour pouvoir passer la commande">Passer la commande</button>
+            </div><br>
+            <span *ngIf="adresse.length === 0" class="text-danger">Veuillez ajouter une adresse pour passer la commande</span>
 
-
-            </div>
           </div>
         </div>
       </div>
