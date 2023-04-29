@@ -6,6 +6,7 @@ import { UtilisateurDto } from "../../swagger/services/models/utilisateur-dto";
 import { LigneCommandesService } from "../../swagger/services/services/ligne-commandes.service";
 import {StatusesService} from "../../swagger/services/services/statuses.service";
 import {StatusDto} from "../../swagger/services/models/status-dto";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-manage-commande',
@@ -28,6 +29,7 @@ export class ManageCommandeComponent implements OnInit {
       private ligneCommandeService: LigneCommandesService,
       private helperService: HelperService,
       private statusService: StatusesService,
+      private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -92,15 +94,18 @@ export class ManageCommandeComponent implements OnInit {
     this.commandeService.updateStatus2({
       numeroCommande: commande.numeroCommande,
       newIdStatus: commande.statusDto.idStatus,
-    }).subscribe(
-        (response: any) => {
-          console.log(response);
-          this.selectedStatus = this.statuses.find(status => status.idStatus === commande.statusDto.idStatus);
-        },
-        (error: any) => {
-          console.log(error);
-        }
-    );
+    }).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.selectedStatus = this.statuses.find(status => status.idStatus === commande.statusDto.idStatus);
+        this.snackBar.open('Le statut a été mis à jour', 'Fermer', {
+          duration: 3000,
+        });
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 
 

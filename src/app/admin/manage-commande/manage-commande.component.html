@@ -31,7 +31,7 @@
             </div>
 
             <div *ngIf="selectedUser">
-                <h2>Commandes de {{selectedUser.nom}} {{selectedUser.prenom}}</h2>
+                <h2>Commande de {{selectedUser.nom}} {{selectedUser.prenom}}</h2>
                 <div class="card">
                     <ul *ngIf="commandes && commandes.length > 0">
                         <li *ngFor="let commande of commandes">

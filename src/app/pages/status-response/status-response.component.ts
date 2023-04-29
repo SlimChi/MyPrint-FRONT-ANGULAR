@@ -5,6 +5,8 @@ import {CommandesService} from "../../swagger/services/services/commandes.servic
 import {LigneCommandesService} from "../../swagger/services/services/ligne-commandes.service";
 import {HelperService} from "../../services/helper/helper.service";
 import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
+import {MailControllerService} from "../../swagger/services/services/mail-controller.service";
+import {EmailMessage} from "../../swagger/services/models/email-message";
 
 @Component({
   selector: 'app-status-response',
@@ -20,6 +22,7 @@ export class StatusResponseComponent implements OnInit{
 
   constructor(      private userService: UtilisateursService,
                     private commandeService: CommandesService,
+                    private mailService: MailControllerService,
                     private ligneCommandeService: LigneCommandesService,
                     private helperService: HelperService,) {
   }
@@ -47,21 +50,30 @@ export class StatusResponseComponent implements OnInit{
         next: (commandes) => {
           this.commandes = commandes as unknown as any[];
           this.calculateAllCompletedSteps(); // ajoute une propriété completedSteps pour chaque commande
-          this.sortCommandesByCompletedSteps(); // trie les commandes par nombre d'étapes terminées
+          this.sortCommandesByCompletedSteps();
+
+          // Recherchez toutes les commandes dont le statut est "Envoyer" et envoyez un email à l'utilisateur correspondant
+          this.commandes.filter(commande => commande.statusDto.libelle === 'Envoyer').forEach(async (commande) => {
+            const emailMessage: EmailMessage = {
+              to: this.user.email,
+              email: `Commande envoyée`,
+              subject: `Votre commande a été envoyée.`
+            };
+            await this.mailService.emailSending({ body: emailMessage }).toPromise();
+          });
         },
         error: (err) => {
           console.error(err);
         }
       });
-    } else {
-      // gérer le cas où aucun utilisateur n'est sélectionné
     }
-  }
 
+  }
 
   async back() {
     window.history.back();
   }
+
   private calculateCompletedSteps(commande: any): number {
     const libelle = commande.statusDto.libelle;
     let completedSteps = 0;
@@ -92,6 +104,5 @@ export class StatusResponseComponent implements OnInit{
       return b.completedSteps - a.completedSteps;
     });
   }
-
 
 }
