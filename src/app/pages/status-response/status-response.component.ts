@@ -46,7 +46,8 @@ export class StatusResponseComponent implements OnInit{
       this.commandeService.getCommandesByIdUser({ idUtilisateur: this.helperService.userId }).subscribe({
         next: (commandes) => {
           this.commandes = commandes as unknown as any[];
-
+          this.calculateAllCompletedSteps(); // ajoute une propriété completedSteps pour chaque commande
+          this.sortCommandesByCompletedSteps(); // trie les commandes par nombre d'étapes terminées
         },
         error: (err) => {
           console.error(err);
@@ -57,8 +58,40 @@ export class StatusResponseComponent implements OnInit{
     }
   }
 
+
   async back() {
     window.history.back();
   }
+  private calculateCompletedSteps(commande: any): number {
+    const libelle = commande.statusDto.libelle;
+    let completedSteps = 0;
+
+    if (libelle === 'Commande confirmé') {
+      completedSteps = 1;
+    } else if (libelle === 'En cours dimpression') {
+      completedSteps = 2;
+    } else if (libelle === 'Terminer') {
+      completedSteps = 3;
+    } else if (libelle === 'Envoyer' || libelle === 'Livrer') {
+      completedSteps = 4;
+    } else if (libelle === 'Livrer') {
+      completedSteps = 5;
+    }
+
+    return completedSteps;
+  }
+
+  private calculateAllCompletedSteps() {
+    this.commandes.forEach((commande) => {
+      commande.completedSteps = this.calculateCompletedSteps(commande);
+    });
+  }
+
+  private sortCommandesByCompletedSteps() {
+    this.commandes.sort((a, b) => {
+      return b.completedSteps - a.completedSteps;
+    });
+  }
+
 
 }
