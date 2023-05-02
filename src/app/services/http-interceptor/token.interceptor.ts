@@ -6,7 +6,7 @@ import {
   HttpInterceptor, HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
 
 
 @Injectable()

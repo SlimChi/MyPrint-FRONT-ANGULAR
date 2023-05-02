@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 
 import {HelperService} from "../../services/helper/helper.service";
-import {StatusResponseComponent} from "../status-response/status-response.component";
-import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
-import {StatusDto} from "../../swagger/service/models/status-dto";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
-import {CommandesService} from "../../swagger/service/services/commandes.service";
-import {LigneCommandesService} from "../../swagger/service/services/ligne-commandes.service";
+import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
+import {StatusDto} from "../../swagger/services/models/status-dto";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+import {CommandesService} from "../../swagger/services/services/commandes.service";
+import {LigneCommandesService} from "../../swagger/services/services/ligne-commandes.service";
+
 
 @Component({
   selector: 'app-historique-commande',
@@ -19,7 +19,6 @@ export class HistoriqueCommandeComponent implements OnInit {
   commandes: any[] = [];
   statuses: StatusDto[];
   currentCommande: any;
-  stepClasses = ['', '', '', '', '']; // initialiser le tableau stepClasses avec des chaînes vides
 
   constructor(
       private userService: UtilisateursService,

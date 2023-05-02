@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { HelperService } from "../../services/helper/helper.service";
 
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
-import {StatusDto} from "../../swagger/service/models/status-dto";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
-import {CommandesService} from "../../swagger/service/services/commandes.service";
-import {LigneCommandesService} from "../../swagger/service/services/ligne-commandes.service";
-import {StatusesService} from "../../swagger/service/services/statuses.service";
+import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
+import {StatusDto} from "../../swagger/services/models/status-dto";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+import {CommandesService} from "../../swagger/services/services/commandes.service";
+import {LigneCommandesService} from "../../swagger/services/services/ligne-commandes.service";
+import {StatusesService} from "../../swagger/services/services/statuses.service";
+
 
 @Component({
   selector: 'app-manage-commande',
@@ -18,7 +19,6 @@ import {StatusesService} from "../../swagger/service/services/statuses.service";
 export class ManageCommandeComponent implements OnInit {
   users: Array<UtilisateurDto> = [];
   selectedUser: UtilisateurDto | null = null;
-  ligneCommandes: any[] = [];
   commandes: any[] = [];
   afficherCommande=false;
   status: string[];

@@ -4,11 +4,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TokenService} from "../../services/token-service/token.service";
-import {NewPassword} from "../../swagger/service/models/new-password";
-import {AuthentificationService} from "../../swagger/service/services/authentification.service";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
-
-
+import {NewPassword} from "../../swagger/services/models/new-password";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+import {AuthentificationService} from "../../swagger/services/services/authentification.service";
 
 @Component({
   selector: 'app-reset-password',
@@ -30,12 +28,11 @@ export class ResetPasswordComponent implements OnInit {
     this.newPassword.tokenPassword = this.tokenUrl;
   }
 
-  constructor(private auth: UtilisateursService,
+  constructor(private auth: AuthentificationService,
               private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar,
               private tokenService: TokenService,
-              private storageService: TokenService,
               ) {
   }
 

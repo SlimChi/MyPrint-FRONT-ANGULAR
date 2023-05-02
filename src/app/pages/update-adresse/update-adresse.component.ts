@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
 import {ActivatedRoute, Router} from "@angular/router";
-
-
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {AdresseDto} from "../../swagger/service/models/adresse-dto";
-import {AddressService} from "../../swagger/service/services/address.service";
+import {AdresseDto} from "../../swagger/services/models/adresse-dto";
+import {AddressService} from "../../swagger/services/services/address.service";
+
 
 @Component({
   selector: 'app-update-adresse',

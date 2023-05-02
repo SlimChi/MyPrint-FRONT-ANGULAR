@@ -4,7 +4,8 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 
 import {CookieService} from "ngx-cookie-service";
 import {HttpClient} from "@angular/common/http";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+
 
 
 @Injectable({

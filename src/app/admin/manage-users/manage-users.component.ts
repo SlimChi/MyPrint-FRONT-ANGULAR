@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 import { HelperService } from '../../services/helper/helper.service';
 
-import {forkJoin, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {TokenService} from "../../services/token-service/token.service";
-import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
-import {AdresseDto} from "../../swagger/service/models/adresse-dto";
-import {TypeAdresse} from "../../swagger/service/models/type-adresse";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
-import {AddressService} from "../../swagger/service/services/address.service";
-import {CommandesService} from "../../swagger/service/services/commandes.service";
+import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
+import {AdresseDto} from "../../swagger/services/models/adresse-dto";
+import {TypeAdresse} from "../../swagger/services/models/type-adresse";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+import {CommandesService} from "../../swagger/services/services/commandes.service";
+import {AddressService} from "../../swagger/services/services/address.service";
+
 
 @Component({
   selector: 'app-manage-users',

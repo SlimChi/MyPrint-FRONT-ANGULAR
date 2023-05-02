@@ -4,15 +4,15 @@ import {HelperService} from "../../services/helper/helper.service";
 
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
-import {DomSanitizer} from "@angular/platform-browser";
 import {forkJoin} from "rxjs";
-import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
-import {AdresseDto} from "../../swagger/service/models/adresse-dto";
-import {TypeAdresse} from "../../swagger/service/models/type-adresse";
-import {AddressService} from "../../swagger/service/services/address.service";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
-import {CommandesService} from "../../swagger/service/services/commandes.service";
-import {InsertFullCommandeDto} from "../../swagger/service/models/insert-full-commande-dto";
+import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
+import {AdresseDto} from "../../swagger/services/models/adresse-dto";
+import {TypeAdresse} from "../../swagger/services/models/type-adresse";
+import {AddressService} from "../../swagger/services/services/address.service";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+import {CommandesService} from "../../swagger/services/services/commandes.service";
+import {InsertFullCommandeDto} from "../../swagger/services/models/insert-full-commande-dto";
+
 
 
 

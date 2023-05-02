@@ -3,11 +3,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HelperService} from "../../services/helper/helper.service";
 import {forkJoin} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {AdresseDto} from "../../swagger/service/models/adresse-dto";
-import {TypeAdresseDto} from "../../swagger/service/models/type-adresse-dto";
-import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
-import {AddressService} from "../../swagger/service/services/address.service";
-import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
+import {AdresseDto} from "../../swagger/services/models/adresse-dto";
+import {TypeAdresseDto} from "../../swagger/services/models/type-adresse-dto";
+import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
+import {AddressService} from "../../swagger/services/services/address.service";
+import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
 
 
 @Component({
