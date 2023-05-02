@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ResetPassword} from "../../swagger/services/models/reset-password";
 import {Router} from "@angular/router";
-import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {AuthentificationService} from "../../swagger/services/services/authentification.service";
+import {ResetPassword} from "../../swagger/service/models/reset-password";
+import {AuthentificationService} from "../../swagger/service/services/authentification.service";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
+
 
 
 
@@ -19,7 +20,7 @@ export class ForgotPasswordComponent implements OnInit{
 
   constructor(
     private router: Router,
-    private userService: AuthentificationService,
+    private userService: UtilisateursService,
     private snackBar: MatSnackBar
 
   ) {

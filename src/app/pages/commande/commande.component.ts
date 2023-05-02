@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UploadService} from "../../services/uploadFile/upload.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {FichiersService} from "../../swagger/services/services/fichiers.service";
+
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TokenService} from "../../services/token-service/token.service";
 import {Router} from "@angular/router";
 import * as pdfjsLib from 'pdfjs-dist';
+import {FichiersService} from "../../swagger/service/services/fichiers.service";
 
 
 @Component({

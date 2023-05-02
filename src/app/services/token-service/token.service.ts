@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+
 import {CookieService} from "ngx-cookie-service";
 import {HttpClient} from "@angular/common/http";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
 
 
 @Injectable({

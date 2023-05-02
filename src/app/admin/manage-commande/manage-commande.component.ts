@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CommandesService } from "../../swagger/services/services/commandes.service";
-import { UtilisateursService } from "../../swagger/services/services/utilisateurs.service";
+
 import { HelperService } from "../../services/helper/helper.service";
-import { UtilisateurDto } from "../../swagger/services/models/utilisateur-dto";
-import { LigneCommandesService } from "../../swagger/services/services/ligne-commandes.service";
-import {StatusesService} from "../../swagger/services/services/statuses.service";
-import {StatusDto} from "../../swagger/services/models/status-dto";
+
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
+import {StatusDto} from "../../swagger/service/models/status-dto";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
+import {CommandesService} from "../../swagger/service/services/commandes.service";
+import {LigneCommandesService} from "../../swagger/service/services/ligne-commandes.service";
+import {StatusesService} from "../../swagger/service/services/statuses.service";
 
 @Component({
   selector: 'app-manage-commande',

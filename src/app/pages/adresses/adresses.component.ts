@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AdresseDto } from '../../swagger/services/models/adresse-dto';
+
 import {HttpClient, HttpContext} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
 
-import { TypeAdresse } from '../../swagger/services/models/type-adresse';
-import { UtilisateurDto } from '../../swagger/services/models/utilisateur-dto';
-import { UtilisateursService } from '../../swagger/services/services/utilisateurs.service';
-import {AddressService} from "../../swagger/services/services/address.service";
+
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
+import {AdresseDto} from "../../swagger/service/models/adresse-dto";
+import {TypeAdresse} from "../../swagger/service/models/type-adresse";
+import {AddressService} from "../../swagger/service/services/address.service";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
 
 @Component({
   selector: 'app-adresses',

@@ -45,7 +45,7 @@
           <div class="form-group mb-3">
             <mat-form-field appearance="fill" class="w-100">
               <mat-label>*Type d'adresse</mat-label>
-              <mat-select [(ngModel)]="adresse.typeAdresse" id="typeAdresse" name="typeAdresse" required>
+              <mat-select [(ngModel)]="adresse.typeAdresseDto" id="typeAdresse" name="typeAdresse" required>
                 <mat-option *ngFor="let type of typesAdresses" [value]="type">{{type.nom}}</mat-option>
               </mat-select>
             </mat-form-field>

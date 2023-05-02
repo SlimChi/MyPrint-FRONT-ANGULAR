@@ -25,10 +25,10 @@
           <label for="ville" class="form-label">Ville</label>
           <input type="text" class="form-control" id="ville" [(ngModel)]="adresse.ville" name="ville" [ngClass]="{'is-invalid': !adresse.ville}" required >
         </div>
-        <ng-container *ngIf="adresse && adresse.typeAdresse">
+        <ng-container *ngIf="adresse && adresse.typeAdresseDto">
           <mat-form-field>
             <mat-label>Type d'adresse</mat-label>
-            <mat-select [(value)]="adresse.typeAdresse.id" name="typeAdresse" required>
+            <mat-select [(value)]="adresse.typeAdresseDto.id" name="typeAdresse" required>
               <mat-option *ngFor="let type of typesAdresses" [value]="type.id">
                 {{ type.nom }}
               </mat-option>
