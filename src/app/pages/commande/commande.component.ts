@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UploadService} from "../../services/uploadFile/upload.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -28,7 +27,7 @@ export class CommandeComponent implements OnInit {
     tirage: number = 1;
     numPages: number;
 
-    constructor(private fichierService: UploadService,
+    constructor(
                 private fileService: FichiersService,
                 private tokenService: TokenService,
                 private snackBar: MatSnackBar,
