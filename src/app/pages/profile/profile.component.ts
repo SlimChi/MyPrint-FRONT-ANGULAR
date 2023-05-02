@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {HelperService} from "../../services/helper/helper.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {AdresseDto} from "../../swagger/services/models/adresse-dto";
-import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
-import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
-import {RegisterRequest} from "../../swagger/services/models/register-request";
+
 import {TokenService} from "../../services/token-service/token.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {RegisterRequest} from "../../swagger/service/models/register-request";
+import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
+import {AdresseDto} from "../../swagger/service/models/adresse-dto";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
 
 
 

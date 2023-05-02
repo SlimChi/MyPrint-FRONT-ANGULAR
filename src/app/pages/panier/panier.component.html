@@ -106,7 +106,7 @@
     <div class="col-md-3" *ngFor="let ad of adresse">
       <div class="card mb-3 shadow">
         <div class="card-body">
-          <h5 class="card-title">{{ ad.typeAdresse?.libelle }}</h5>
+          <h5 class="card-title">{{ ad.typeAdresseDto?.libelle }}</h5>
           <p class="card-text">{{ ad.rue }} {{ ad.complement }}</p>
           <p class="card-text">{{ ad.codePostal }} {{ ad.ville }}</p>
           <div class="d-flex justify-content-end">

@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AdresseDto} from "../../swagger/services/models/adresse-dto";
+
 import {ActivatedRoute, Router} from "@angular/router";
 
-import {AddressService} from "../../swagger/services/services/address.service";
+
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AdresseDto} from "../../swagger/service/models/adresse-dto";
+import {AddressService} from "../../swagger/service/services/address.service";
 
 @Component({
   selector: 'app-update-adresse',
@@ -45,7 +47,7 @@ export class UpdateAdresseComponent implements OnInit{
 
   updateAdresse() {
     this.successMsg = '';
-    if (!this.adresse.rue || !this.adresse.codePostal || !this.adresse.ville || !this.adresse.typeAdresse) {
+    if (!this.adresse.rue || !this.adresse.codePostal || !this.adresse.ville || !this.adresse.typeAdresseDto) {
       this.errorMessage = 'Veuillez remplir tous les champs obligatoires.';
       return;
     }

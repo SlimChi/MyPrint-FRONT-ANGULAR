@@ -1,13 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StatusDto} from "../../swagger/services/models/status-dto";
-import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
-import {CommandesService} from "../../swagger/services/services/commandes.service";
-import {LigneCommandesService} from "../../swagger/services/services/ligne-commandes.service";
+
 import {HelperService} from "../../services/helper/helper.service";
-import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
-import {MailControllerService} from "../../swagger/services/services/mail-controller.service";
-import {EmailMessage} from "../../swagger/services/models/email-message";
+
 import {firstValueFrom} from "rxjs";
+import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
+import {StatusDto} from "../../swagger/service/models/status-dto";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
+import {CommandesService} from "../../swagger/service/services/commandes.service";
+import {MailControllerService} from "../../swagger/service/services/mail-controller.service";
+import {LigneCommandesService} from "../../swagger/service/services/ligne-commandes.service";
+import {EmailMessage} from "../../swagger/service/models/email-message";
 
 @Component({
   selector: 'app-status-response',

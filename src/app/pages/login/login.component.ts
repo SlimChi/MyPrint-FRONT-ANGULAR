@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {AuthenticationRequest} from "../../swagger/services/models/authentication-request";
+
 import {TokenService} from "../../services/token-service/token.service";
 import {HelperService} from "../../services/helper/helper.service";
-import {RegisterRequest} from "../../swagger/services/models/register-request";
-import {AuthentificationService} from "../../swagger/services/services/authentification.service";
-import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
+
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {RegisterRequest} from "../../swagger/service/models/register-request";
+import {AuthenticationRequest} from "../../swagger/service/models/authentication-request";
+import {AuthentificationService} from "../../swagger/service/services/authentification.service";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
 
 
 @Component({

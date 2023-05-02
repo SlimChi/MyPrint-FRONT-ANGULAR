@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {AdresseDto} from "../../swagger/services/models/adresse-dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HelperService} from "../../services/helper/helper.service";
-import {UtilisateurDto} from "../../swagger/services/models/utilisateur-dto";
-import {UtilisateursService} from "../../swagger/services/services/utilisateurs.service";
-import {AddressService} from "../../swagger/services/services/address.service";
 import {forkJoin} from "rxjs";
-import {TypeAdresse} from "../../swagger/services/models/type-adresse";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AdresseDto} from "../../swagger/service/models/adresse-dto";
+import {TypeAdresseDto} from "../../swagger/service/models/type-adresse-dto";
+import {UtilisateurDto} from "../../swagger/service/models/utilisateur-dto";
+import {AddressService} from "../../swagger/service/services/address.service";
+import {UtilisateursService} from "../../swagger/service/services/utilisateurs.service";
 
 
 @Component({
@@ -24,7 +24,7 @@ export class AddAdresseComponent implements OnInit{
   adresse2: Array<AdresseDto> = [];
   errorMessage: string | null = null;
   successMsg = '';
-  typesAdresse: Array<TypeAdresse> = []; // étape 1
+  typesAdresse: Array<TypeAdresseDto> = []; // étape 1
 
   userDto: unknown = {email: '', nom: '', prenom: ''};
   user: UtilisateurDto = {email: '', nom: '', prenom: ''};
@@ -68,7 +68,7 @@ export class AddAdresseComponent implements OnInit{
   addAdresse() {
     this.successMsg = '';
     const userId = this.helperService.userId;
-    if (!this.adresse.rue || !this.adresse.codePostal || !this.adresse.ville || !this.adresse.typeAdresse) {
+    if (!this.adresse.rue || !this.adresse.codePostal || !this.adresse.ville || !this.adresse.typeAdresseDto) {
       this.errorMessage = 'Veuillez remplir tous les champs obligatoires.';
       return;
     }
