@@ -50,7 +50,6 @@ export class AdressesComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        // gérer le cas d'erreur ici
       }
     });
   }

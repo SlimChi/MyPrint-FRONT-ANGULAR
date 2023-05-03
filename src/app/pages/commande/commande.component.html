@@ -1,102 +1,120 @@
-
 <div class="text-center">
-  <div class="justify-content-center">
-    <div class="d-inline-flex">
-      <div class="card w-100" (drop)="onFileDropped($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
-        <div class="card-header">
-          <small class="form-text text-muted">
-            La taille du fichier ne doit pas dépasser la limite autorisée de 10 Mo.
-          </small>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <div class="custom-file d-flex justify-content-center" >
-                <img src="/assets/images/upload.png" width="250" height="250" style="cursor: pointer" (click)="fileInput.click()" (drop)="onFileDropped($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
-                <input type="file" class="form-control-file" id="fileInput" #fileInput hidden (change)="onFileSelected($event)">
-                <div class="spinner-border text-primary" *ngIf="uploading"></div>
-              </div>
+    <div class="justify-content-center">
+        <div class="d-inline-flex">
+            <div class="card w-100" (drop)="onFileDropped($event)" (dragover)="onDragOver($event)"
+                 (dragleave)="onDragLeave($event)">
+                <div class="card-header">
+                    <small class="form-text text-muted">
+                        La taille du fichier ne doit pas dépasser la limite autorisée de 10 Mo.
+                    </small>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="custom-file d-flex justify-content-center">
+                                <img src="/assets/images/upload.png" width="250" height="250" style="cursor: pointer"
+                                     (click)="fileInput.click()" (drop)="onFileDropped($event)"
+                                     (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+                                <input type="file" class="form-control-file" id="fileInput" #fileInput hidden
+                                       (change)="onFileSelected($event)">
+                                <div class="spinner-border text-primary" *ngIf="uploading"></div>
+                            </div>
 
+                        </div>
+                        <div class="progress mt-2" *ngIf="uploading">
+                            <div class="progress-bar" role="progressbar" [style.width]="progress + '%'"
+                                 [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">{{ progress }}%
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="progress mt-2" *ngIf="uploading">
-              <div class="progress-bar" role="progressbar" [style.width]="progress + '%'" [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+
+                        <form class="mt-3">
+                            <div class="">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="custom-file d-flex flex-column">
+                                            <div class="d-flex">
+                                                <label class="form-check-label" for="couleur">Format:</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="format" id="a4"
+                                                           value="a4" checked (change)="selectFormat($event)">
+                                                    <label class="form-check-label card-text" for="a4">A4</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="format" id="a3"
+                                                           value="a3" (change)="selectFormat($event)">
+                                                    <label class="form-check-label card-text" for="a4">A3</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-8 align-self-center">
+                                            <label class="form-check-label form-check-label-space form-label"
+                                                   style="width: 145px;" for="couleur">Impression couleur : </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check  form-switch">
+                                                <input class="form-check-input form1" type="checkbox" id="couleur"
+                                                       (change)="toggleCouleur()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 align-self-center">
+                                            <label class="form-check-label form-check-label-space form-label"
+                                                   style="width: 95px;" for="recto-verso">Recto-verso : </label></div>
+                                        <div class="col-md-4">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input form1" type="checkbox" id="recto-verso"
+                                                       (change)="toggleRectoVerso()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="form-check-label form-label" style="width: 55px;" for="tirage">Tirage
+                                        : </label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="tirage"
+                                                       [(ngModel)]="tirage" [ngModelOptions]="{ standalone: true }"
+                                                       min="1">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <p style="width: 220px;">Nombre de pages du pdf : {{numPages}}</p>
+                                    <p style="width: 250px;">Nombre de pages à imprimer : {{numPages * tirage}}</p>
+
+                                    <div class="file-name custom-width" style="font-size: 0.7em;">
+                                        <i class="far fa-file" *ngIf="selectedFile"></i> {{ fileName }}
+                                        <button class="btn btn-sm btn-danger" *ngIf="selectedFile"
+                                                (click)="deleteUploadedFile()"><i class="fa fa-trash"></i></button>
+                                        <br>
+                                    </div>
+                                    <p class="card-text2">Prix total : {{ (0.10 * (numPages * tirage)).toFixed(2) }}
+                                        €</p>
+                                    <div class="btncommande mt-3">
+                                        <button type="button" class="btn btn-outline-success btn-block btn-commande"
+                                                (click)="ajouterAuPanier();onCommanderClicked()"
+                                                [disabled]="uploading || !selectedFile">Ajouter au panier
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </form>
         </div>
-      </div>
-
-      <div class="card w-100">
-        <div class="card-body">
-          <form class="mt-3">
-            <div class="">
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <div class="custom-file d-flex flex-column">
-                    <div class="d-flex">
-                      <label class="form-check-label" for="couleur">Format:</label>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="format" id="a4" value="a4" checked (change)="selectFormat($event)">
-                        <label class="form-check-label" for="a4">A4</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="format" id="a3" value="a3" (change)="selectFormat($event)">
-                        <label class="form-check-label" for="a3">A3</label>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-12">
-                <div class="row">
-                  <div class="col-md-8 align-self-center">
-                    <label class="form-check-label form-check-label-space"  style="width: 145px;"for="couleur" >Impression couleur : </label>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input form1" type="checkbox" id="couleur" (change)="toggleCouleur()">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-8 align-self-center">
-                    <label class="form-check-label form-check-label-space" style="width: 95px;" for="recto-verso">Recto-verso : </label>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input form1" type="checkbox" id="recto-verso" (change)="toggleRectoVerso()">
-                    </div>
-                  </div>
-                </div>
-                <label class="form-check-label" style="width: 55px;" for="tirage">Tirage : </label>
-                <div class="form-group">
-                  <div class="input-group">
-                      <div class="form-group">
-                        <input type="number" class="form-control" id="tirage" [(ngModel)]="tirage" [ngModelOptions]="{ standalone: true }" min="1">
-                      </div>
-                  </div>
-
-                </div>
-                <p style="width: 220px;">Nombre de pages du pdf : {{numPages}}</p>
-                <p style="width: 250px;">Nombre de pages à imprimer : {{numPages * tirage}}</p>
-
-                <div class="file-name custom-width" style="font-size: 0.7em;">
-                  <i class="far fa-file" *ngIf="selectedFile"></i> {{ fileName }}
-                  <button class="btn btn-sm btn-danger" *ngIf="selectedFile" (click)="deleteUploadedFile()"><i class="fa fa-trash"></i></button>
-                </div>
-                  <p style="width: 220px;margin-left: 90px">Prix : {{ (0.10 * (numPages * tirage)).toFixed(2) }} €</p>
-
-                <div class="btncommande mt-3">
-                  <button type="button" class="btn btn-outline-success btn-block btn-commande" (click)="ajouterAuPanier();onCommanderClicked()" [disabled]="uploading || !selectedFile">Ajouter au panier</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-
-      </div>
-
     </div>
-
-  </div>
 </div>

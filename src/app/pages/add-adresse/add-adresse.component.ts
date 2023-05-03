@@ -66,7 +66,6 @@ export class AddAdresseComponent implements OnInit{
   }
 
   addAdresse() {
-    this.successMsg = '';
     const userId = this.helperService.userId;
     if (!this.adresse.rue || !this.adresse.codePostal || !this.adresse.ville || !this.adresse.typeAdresseDto) {
       this.errorMessage = 'Veuillez remplir tous les champs obligatoires.';
@@ -74,24 +73,19 @@ export class AddAdresseComponent implements OnInit{
     }
     if (!this.adresse.id) {
       this.adresse.utilisateurId = userId;
-      this.adresseService.save({
-        body: this.adresse
-      }).subscribe({
-        next: () => {
-          this.router.navigate(['user/adresses']);
-          this.snackBar.open('Votre adresse a été ajoutée avec succès !', 'Fermer', {
-            duration: 3000
-          });
-        },
-        error: (err) => {
-          console.error(err);
-          this.errorMessage = "Impossible d'ajouter votre adresse";
-          this.snackBar.open("Impossible d'ajouter votre adresse.", 'Fermer', {
-            duration: 3000
-          });
-        }
-      });
+      this.adresseService.save({ body: this.adresse }).subscribe(
+          () => {
+            this.router.navigate(['user/adresses']);
+            this.snackBar.open('Votre adresse a été ajoutée avec succès !', 'Fermer', { duration: 3000 });
+          },
+          (err) => {
+            console.error(err);
+            this.errorMessage = "Impossible d'ajouter votre adresse";
+            this.snackBar.open("Impossible d'ajouter votre adresse.", 'Fermer', { duration: 3000 });
+          }
+      );
     }
+    this.successMsg = '';
   }
   async back() {
     window.history.back();

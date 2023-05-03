@@ -89,33 +89,44 @@ export class CommandeComponent implements OnInit {
     storeFile(): void {
         const reader = new FileReader();
         reader.onload = (event) => {
-            if (event.target) {
-                this.fileData = event.target.result as string; // mettre à jour la valeur de fileData
-                const fileName = this.selectedFile?.name ?? '';
-                const fileSize = this.selectedFile?.size ?? 0;
-                const fileDate = new Date();
+            if (!event.target) return;
 
-                const file = {
-                    name: fileName,
-                    size: fileSize,
-                    date: fileDate,
-                    data: this.fileData, // utiliser la valeur mise à jour de fileData
-                    nbrPages: this.numPages
-                };
+            // Récupérer les informations sur le fichier
+            const file = {
+                name: this.selectedFile?.name ?? '',
+                size: this.selectedFile?.size ?? 0,
+                date: new Date(),
+                data: event.target.result as string,
+                nbrPages: this.numPages
+            };
 
-                // Récupérer la liste des fichiers à partir du localstorage
-                const fileListString = localStorage.getItem('fileList');
-                const fileList = fileListString ? JSON.parse(fileListString) : [];
-
-                // Ajouter le nouveau fichier à la liste des fichiers
-                fileList.push(file);
-
-                // Sauvegarder la liste des fichiers dans le localstorage
-                localStorage.setItem('fileList', JSON.stringify(fileList));
+            // Vérifier que toutes les informations sur le fichier sont disponibles
+            if (!file.name || !file.size || !file.data) {
+                console.error("Le fichier est invalide.");
+                return;
             }
+
+            // Récupérer la liste des fichiers à partir du localStorage
+            const fileListString = localStorage.getItem('fileList');
+            const fileList = fileListString ? JSON.parse(fileListString) : [];
+
+            // Ajouter le nouveau fichier à la liste des fichiers
+            fileList.push(file);
+
+            // Sauvegarder la liste des fichiers dans le localStorage
+            localStorage.setItem('fileList', JSON.stringify(fileList));
+
+            // Afficher un message de succès
+            this.snackBar.open('Le fichier a été sauvegardé.', 'Fermer', { duration: 3000 });
+
+            // Vider la sélection de fichier
+            this.selectedFile = null;
         };
+
+        // Lire le contenu du fichier
         reader.readAsDataURL(this.selectedFile as Blob);
     }
+
 
 
     ajouterAuPanier(): void {

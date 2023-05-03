@@ -17,3 +17,14 @@
         margin-left: 19%;
     }
 }
+.max-width-100 {
+    max-width: 100%;
+}
+.command-info div {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+.command-info span {
+    max-width: 100%;
+    display: inline-block;
+}
